@@ -1,10 +1,10 @@
 .project {
     color: white;
-    margin: 100px 100px;
+    margin: 100px 70px 100px;
+    background-color: rgba(32, 32, 32, 1);
 }
 .section__title {
     margin: 0;
-    padding: 0;
     font-size: 22px;
     font-weight: 400;
     line-height: 27px;
@@ -46,6 +46,7 @@
 }
 .project__graph {
     padding: 0;
+    margin: 0;
     display: grid;
     grid-template-columns: 20% auto;
 }  
