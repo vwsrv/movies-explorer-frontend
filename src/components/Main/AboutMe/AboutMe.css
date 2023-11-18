@@ -1,0 +1,110 @@
+.about {
+    margin: 0 70px 100px;
+}
+
+.about__person {
+    display: grid;
+    grid-template-areas:
+    "name photo"
+    "about photo"
+    "carrer photo"
+    "website photo";
+    margin: 66px 0 100px;
+    padding: 0;
+}
+
+.person__name {
+    grid-area: name;
+    margin: 0;
+    padding: 0;
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 58px;
+    letter-spacing: -0.04em;
+    text-align: left;
+}
+
+.person__about {
+    grid-area: about;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+}
+
+.person__carrer {
+    max-width: 600px;
+    grid-area: carrer;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.person__website {
+    align-self: end;
+    grid-area: website;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+}
+
+.person__photo {
+    grid-row: 1/2;
+    grid-area: photo;
+    align-self: end;;
+    justify-self: end;
+    border-radius: 10px;
+    max-width: 270px;
+    min-height: 327px;
+    object-fit: cover;
+}
+
+.portfolio {
+    margin: auto;
+    padding: 0;
+}
+
+.portfolio__title {
+    margin: 0 0 50px;
+    padding: 0;
+    color: rgba(139, 139, 139, 1);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -4%;
+    text-align: left;
+}
+
+.project__item {
+    padding: 0 0 19px;
+    margin: 0 0 20px;
+    list-style-type: none;
+    border-bottom: 1px solid rgba(66, 66, 66, 1);
+}
+
+.project__link {
+    margin: 0;
+    padding: 0;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.project__name {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 50px;
+    text-align: left;
+}
+
+.link__image {
+    margin: 0;
+    padding: 0;
+}
