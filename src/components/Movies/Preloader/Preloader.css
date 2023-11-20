@@ -1,0 +1,19 @@
+.preloader {
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto 80px;
+}
+
+.preloader-btn {
+    min-height: 36px;
+    border-radius: 6px;
+    background-color: rgba(47, 47, 47, 1);
+    color: white;
+    cursor: pointer;
+    border: 0;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+    letter-spacing: 0px;
+}
+
