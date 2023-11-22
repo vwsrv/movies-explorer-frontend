@@ -1,5 +1,5 @@
 .about {
-    margin: 0 70px 100px;
+    margin: 0 70px 101px;
 }
 
 .about__person {
@@ -61,50 +61,4 @@
     max-width: 270px;
     min-height: 327px;
     object-fit: cover;
-}
-
-.portfolio {
-    margin: auto;
-    padding: 0;
-}
-
-.portfolio__title {
-    margin: 0 0 50px;
-    padding: 0;
-    color: rgba(139, 139, 139, 1);
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: -4%;
-    text-align: left;
-}
-
-.project__item {
-    padding: 0 0 19px;
-    margin: 0 0 20px;
-    list-style-type: none;
-    border-bottom: 1px solid rgba(66, 66, 66, 1);
-}
-
-.project__link {
-    margin: 0;
-    padding: 0;
-    color: white;
-    text-decoration: none;
-    display: flex;
-    justify-content: space-between;
-}
-
-.project__name {
-    margin: 0;
-    padding: 0;
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 50px;
-    text-align: left;
-}
-
-.link__image {
-    margin: 0;
-    padding: 0;
 }
