@@ -12,8 +12,8 @@ export default function Profile() {
                     <input type="text" className="profile__input profile__input_type-email" />
                 </label>
                 <span className="profile__input-error"></span>
-                <button className="profile__edit-btn">Редактировать</button>
-                <a href="#" className="profile__signout-link">Выйти из аккаунта</a>
+                <button className="profile__button profile__edit-btn">Редактировать</button>
+                <button href="#" className="profile__button profile__signout-btn">Выйти из аккаунта</button>
             </form>
         </div>
     )
