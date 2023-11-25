@@ -9,9 +9,10 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm({
-    mode: "onChange",
+    mode: "onBlur",
   });
 
   return (
@@ -53,7 +54,7 @@ export default function Login() {
             required: "Заполните это поле.",
             minLength: {
               value: 8,
-              message: "Минимальная длина пароля - 8 символов.",
+              message: `Минимальная длина пароля: 8. Вы ввели: ${userPassword.length}.`,
             },
             })
           }
