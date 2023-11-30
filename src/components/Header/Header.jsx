@@ -3,26 +3,21 @@ import Navigation from "../Navigation/Navigation";
 import { useLocation, NavLink } from "react-router-dom";
 import { hiddenRoutes } from "../../utils/constants";
 
-export default function Header() {
+export default function Header({ loggedIn }) {
   const location = useLocation();
   const isMainPage = location.pathname === "/";
 
   return (
     hiddenRoutes.includes(location.pathname) && (
       <header
-        className={
-          isMainPage
-            ? "header header__theme_default"
-            : "header header__theme_dark"
-        }
-      >
+        className={isMainPage ?"header header__theme_default" : "header header__theme_dark"}>
         <div className="header__container">
           <img
             src={headerLogo}
             alt="Логотип сайта"
             className="header__logo"
           ></img>
-          {isMainPage && (
+          {!loggedIn ? (
             <div className="header__links">
               <NavLink
                 to="/signup"
@@ -37,8 +32,8 @@ export default function Header() {
                 Войти
               </NavLink>
             </div>
-          )}
-          <Navigation />
+          ) :
+          <Navigation />}
         </div>
       </header>
     )

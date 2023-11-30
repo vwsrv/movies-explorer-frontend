@@ -10,16 +10,16 @@ export default function Navigation() {
   const isDefaultResolution = TABLET_SCREEN_SZ <= width;
 
   return (
-    !isMainPage && <div className="nav">
+    <div className={!isMainPage ? "nav" : "nav__theme-default"}>
       {isDefaultResolution ? (
-        <nav className="nav__links_theme-dark">
+        <nav className="nav__links">
           <div className="movies__links">
-            <NavLink to="/movies" className="nav__link nav__link_theme-dark">
+            <NavLink to="/movies" className="nav__link">
               Фильмы
             </NavLink>
             <NavLink
               to="/saved-movies"
-              className="nav__link nav__link_theme-dark"
+              className="nav__link"
             >
               Сохраненные фильмы
             </NavLink>

@@ -1,6 +1,6 @@
 .profile {
     color: white;
-    margin: 25vh auto 25vh;
+    margin: 20vh auto 15vh;
     padding: 0;
 }
 
@@ -94,4 +94,10 @@
     text-decoration: none;
     color: rgba(238, 52, 101, 1);
     font-weight: 500;
+}
+
+@media screen and (max-width: 651px) {
+    .profile {
+        margin: 20vh auto 10vh;
+    }
 }

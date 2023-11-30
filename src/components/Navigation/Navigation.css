@@ -2,57 +2,46 @@
     background-color: rgba(32, 32, 32, 1);
 }
 
-.nav__links {
-    display: flex;
-    align-items: center;
+.nav__theme-default {
+    background-color: rgba(7, 48, 66, 1);
 }
 
-.nav__links_theme-dark {
-    width: 100%;
+.nav__links {
     display: flex;
-    justify-self: start;
     justify-content: space-between;
 }
 
-.nav_links_type-mobile {
-    padding-right: 500px;
-    margin: 0 500px 0 0;
-    transition: ease-in-out 0.3s;
-}
-
 .nav__link {
-    margin: 0;
-    padding: 0;
+    margin: 0 16px 0 0;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0px;
     color: white;
     text-decoration: none;
     text-align: center;
-    border: none;
     background: none;
     cursor: pointer;
 }
 
-.nav__link_type-signup {
-    height: 16px;
-    margin: 0 30px 0 0;
+.nav__link:nth-last-child(1) {
+    margin: 0;
 }
 
-.nav__link_type-signin {
-    display: grid;
-    align-content: center;
-    color: rgba(0, 0, 0, 1);
-    height: 32px;
-    width: 76px;
-    border-radius: 3px;
-    background-color: rgba(61, 220, 132, 1);
+.nav__link.active::after {
+    content: '';
+    display: block;
+    border-bottom: 2px solid white;
 }
 
 .nav__link-profile {
     display: grid;
     grid-template-columns: 53px 26px;
     align-items: center;
+    column-gap: 7px;
+}
+
+.nav__link-profile.active::after {
+    display: none;
 }
 
 .link__profile-logo {
@@ -63,10 +52,6 @@
     min-width: 26px;
     min-height: 26px;
     border-radius: 20px;
-}
-
-.nav__link_theme-dark {
-    margin: 0 16px 0 0;
 }
 
 .movies__links {

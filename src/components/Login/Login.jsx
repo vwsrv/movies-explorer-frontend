@@ -3,7 +3,7 @@ import Auth from "../Auth/Auth";
 import { useForm } from "react-hook-form";
 import { emailAngular } from "../../utils/constants";
 
-export default function Login() {
+export default function Login({ onLogin }) {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const {
@@ -14,9 +14,9 @@ export default function Login() {
     mode: "onBlur",
   });
 
-  // function onSubmit() {
-  //   onLogin({ userEmail, userPassword });
-  // }
+  function onSubmit() {
+    onLogin({ userEmail, userPassword });
+  }
 
   return (
     <Auth
@@ -24,7 +24,7 @@ export default function Login() {
       buttonText="Войти"
       authText="Ещё не зарегистрированы?"
       linkText="Регистрация"
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       isValid={isValid}
     >
       <label htmlFor="user" className="auth__field">
