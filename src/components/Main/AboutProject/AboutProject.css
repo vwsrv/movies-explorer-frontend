@@ -1,8 +1,10 @@
 .project {
     color: white;
-    margin: 100px 70px 100px;
+    margin: 0 70px 100px;
+    padding-top: 100px;
     background-color: rgba(32, 32, 32, 1);
 }
+
 .section__title {
     margin: 0;
     font-size: 22px;
@@ -10,6 +12,7 @@
     line-height: 27px;
     border-bottom: 1px solid rgba(218, 218, 218, 1);
     padding: 0 0 23px;
+    letter-spacing: -0.04em;
 }
 
 .project__description {
@@ -34,8 +37,9 @@
     padding: 0;
     font-size: 20px;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 24.2px;
 }
+
 .description__paragraph {
     margin: 0;
     padding: 0;
@@ -44,12 +48,13 @@
     line-height: 20px;
     letter-spacing: 0em;
 }
+
 .project__graph {
     padding: 0;
     margin: 0;
     display: grid;
     grid-template-columns: 20% auto;
-}  
+}
 
 .graph__item {
     display: flex;
@@ -57,15 +62,16 @@
     list-style-type: none;
 }
 
-.graph__title{
+.graph__title {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
     font-weight: 400;
-    line-height: 17px;
+    line-height: 16.94px;
     margin: 0;
     height: 36px;
+    letter-spacing: -0.04em;
 }
 
 .graph__title_color-green {
@@ -86,5 +92,78 @@
     line-height: 17px;
     letter-spacing: 0px;
     text-align: center;
-    color:rgba(139, 139, 139, 1);
+    color: rgba(139, 139, 139, 1);
+}
+
+
+@media screen and (max-width: 769px) {
+    .project {
+        margin: 0 50px 90px;
+        padding-top: 90px;
+    }
+
+    .description__brief {
+        font-size: 20px;
+        line-height: 24.2px;
+    }
+
+    .description__paragraph {
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 651px) {
+    .section__title {
+        padding: 0 0 28px;
+    }
+
+    .project {
+        margin: 0 18px 70px;
+        padding-top: 70px;
+    }
+
+    .project__description {
+        flex-direction: column;
+        margin: 60px auto 60px;
+    }
+
+    .description__item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 auto 56px;
+    }
+
+    .description__brief {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .description__paragraph {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .graph__title {
+        font-size: 11px;
+        line-height: 13px;
+    }
+
+    .graph__description {
+        font-size: 11px;
+        line-height: 13px;
+    }
+
+    .project__graph {
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: 34% auto;
+    }
+
+    .section__title {
+        font-size: 18px;
+        line-height: 22px;
+    }
 }

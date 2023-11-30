@@ -11,8 +11,8 @@ export default function BurgerMenu() {
   const isMobile = MOBILE_SCREEN_SZ >= width;
   const [showMenu, setShowMenu] = useState(false);
   const menuProperties = useSpring({
-    left: showMenu ? 0 : 300,
-    from: { left: showMenu ? 0 : 300 },
+    left: showMenu ? 0 : 800,
+    from: { left: showMenu ? 0 : 800 },
   });
   
   function handleOpenBurgerManu() {

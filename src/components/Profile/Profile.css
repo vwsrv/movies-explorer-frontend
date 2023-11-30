@@ -3,6 +3,7 @@
     margin: 25vh auto 25vh;
     padding: 0;
 }
+
 .profile__title {
     margin: 74px auto 123px;
     padding: 0;
@@ -12,6 +13,7 @@
     letter-spacing: 0em;
     text-align: center;
 }
+
 .profile__form {
     display: flex;
     flex-direction: column;
@@ -19,6 +21,7 @@
     padding: 0;
     max-width: 410px;
 }
+
 .profile__field {
     display: flex;
     justify-content: space-between;
@@ -30,6 +33,7 @@
     margin: 0 0 17px;
     border-bottom: 1px solid rgba(66, 66, 66, 1);
 }
+
 .profile__field:nth-child(2) {
     padding: 0;
     margin: 0 0 220px;
@@ -37,6 +41,7 @@
 }
 
 .profile__input {
+    width: 90%;
     background: 0;
     border: 0;
     margin: 0;
@@ -44,8 +49,8 @@
     text-align: right;
     color: white;
     outline: none;
-    
 }
+
 .profile__input_name {
     font-size: 11px;
     font-weight: 500;
@@ -55,6 +60,7 @@
     margin: 0;
     padding: 0;
 }
+
 .profile__input-error {
     color: rgba(255, 0, 76, 1);
     font-size: 11px;
@@ -65,7 +71,9 @@
     padding: 0;
     margin: 0 0 20px;
 }
+
 .profile__button {
+    cursor: pointer;
     background: 0;
     outline: 0;
     border: 0;
@@ -74,15 +82,16 @@
     line-height: 16px;
     font-size: 13px;
 }
+
 .profile__edit-btn {
     color: white;
     font-weight: 400;
     line-height: 16px;
 }
+
 .profile__signout-btn {
     margin: 16px 0 0;
-    cursor: pointer;
     text-decoration: none;
     color: rgba(238, 52, 101, 1);
-    font-weight: 500; 
+    font-weight: 500;
 }

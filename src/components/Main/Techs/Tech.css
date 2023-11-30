@@ -17,21 +17,24 @@
     line-height: 58px;
     text-align: center;
 }
+
 .tech_brief {
-    margin: 26px 0 0;
+    margin: 26px auto 0;
     padding: 0;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
     text-align: center;
-
+    letter-spacing: -0.04em;
 }
+
 .tech__stack {
     display: flex;
     justify-content: center;
     margin: 100px 0 0;
     padding: 0;
 }
+
 .stack__name {
     display: flex;
     align-items: center;
@@ -46,4 +49,61 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 17px;
+    letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 769px) {
+    .tech {
+        padding: 90px 0 90px;
+        margin: 0 0 90px;
+    }
+
+    .tech__container {
+        margin: 0 50px 0;
+    }
+
+    .tech_brief {
+        font-size: 12px;
+        line-height: 18px;
+        max-width: 460px;
+    }
+
+    .stack__name {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
+
+@media screen and (max-width: 651px) {
+    .tech {
+        padding: 70px 0 70px;
+        margin: 0;
+    }
+
+    .tech__container {
+        margin: 0 18px 0;
+        padding: 0;
+    }
+
+    .tech__subtitle {
+        margin: 60px 0 0;
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .tech_brief {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .tech__stack {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: repeat(2, min-content);
+        gap: 10px;
+    }
+
+    .stack__name {
+        margin: 0;
+    }
 }

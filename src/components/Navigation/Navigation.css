@@ -1,18 +1,10 @@
 .nav {
-    justify-self: end;
+    background-color: rgba(32, 32, 32, 1);
 }
 
 .nav__links {
     display: flex;
     align-items: center;
-}
-
-.nav__links_type-auth {
-    display: flex;
-}
-
-.nav__links_type-auth_inactive {
-    display: none;
 }
 
 .nav__links_theme-dark {
@@ -22,8 +14,10 @@
     justify-content: space-between;
 }
 
-.nav__links_theme-dark_inactive {
-    display: none;
+.nav_links_type-mobile {
+    padding-right: 500px;
+    margin: 0 500px 0 0;
+    transition: ease-in-out 0.3s;
 }
 
 .nav__link {
@@ -48,7 +42,7 @@
 .nav__link_type-signin {
     display: grid;
     align-content: center;
-    color:rgba(0, 0, 0, 1);
+    color: rgba(0, 0, 0, 1);
     height: 32px;
     width: 76px;
     border-radius: 3px;

@@ -4,6 +4,7 @@
     text-align: center;
     margin: 35vh auto 35vh;
 }
+
 .notfound__title {
     font-size: 140px;
     font-weight: 400;
@@ -13,6 +14,7 @@
     margin: 0;
     padding: 0;
 }
+
 .notfound__subtitle {
     margin: 5px 0 164px;
     padding: 0;
@@ -22,6 +24,7 @@
     letter-spacing: 0em;
     text-align: center;
 }
+
 .notfound__link {
     margin: auto;
     padding: 0;

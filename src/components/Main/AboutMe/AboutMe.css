@@ -1,15 +1,16 @@
 .about {
-    margin: 0 70px 101px;
+    margin: 0 70px 0;
 }
 
 .about__person {
+    column-gap: 18.75%;
     display: grid;
     grid-template-areas:
-    "name photo"
-    "about photo"
-    "carrer photo"
-    "website photo";
-    margin: 66px 0 100px;
+        "name photo"
+        "about photo"
+        "carrer photo"
+        "website photo";
+    margin: 66px 0 0;
     padding: 0;
 }
 
@@ -33,7 +34,6 @@
 }
 
 .person__carrer {
-    max-width: 600px;
     grid-area: carrer;
     font-size: 14px;
     font-weight: 400;
@@ -55,10 +55,83 @@
 .person__photo {
     grid-row: 1/2;
     grid-area: photo;
-    align-self: end;;
+    align-self: end;
+    ;
     justify-self: end;
     border-radius: 10px;
     max-width: 270px;
     min-height: 327px;
     object-fit: cover;
+}
+
+@media screen and (max-width: 769px) {
+    .about {
+        margin: 0 50px 0;
+    }
+
+    .person__name {
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .person__carrer {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .person__about {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .person__photo {
+        max-width: 255px;
+        min-height: 307px;
+    }
+}
+
+@media screen and (max-width: 651px) {
+    .about {
+        margin: 0 14px 0;
+        padding-top: 70px;
+    }
+
+    .about__person {
+        margin: 60px auto 0;
+        grid-template-areas:
+            "photo"
+            "name"
+            "about"
+            "carrer"
+            "website";
+        gap: 20px;
+    }
+
+    .person__name {
+        margin: 0;
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .person__about {
+        margin: 0;
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .person__carrer {
+        margin: 0;
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .person__photo {
+        justify-self: center;
+        min-width: 100%;
+        margin: 0 0 20px;
+    }
+
+    .person__website {
+        margin: 20px 0 0;
+    }
 }

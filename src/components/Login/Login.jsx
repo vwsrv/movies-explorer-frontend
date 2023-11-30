@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useState } from "react";
 import Auth from "../Auth/Auth";
 import { useForm } from "react-hook-form";
 import { emailAngular } from "../../utils/constants";
@@ -9,11 +9,14 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isValid },
   } = useForm({
     mode: "onBlur",
   });
+
+  // function onSubmit() {
+  //   onLogin({ userEmail, userPassword });
+  // }
 
   return (
     <Auth
@@ -22,6 +25,7 @@ export default function Login() {
       authText="Ещё не зарегистрированы?"
       linkText="Регистрация"
       onSubmit={handleSubmit}
+      isValid={isValid}
     >
       <label htmlFor="user" className="auth__field">
         <span className="auth__input_name">E-mail</span>
@@ -34,8 +38,7 @@ export default function Login() {
               value: emailAngular,
               message: "Укажите корректный email.",
             },
-          })    
-          }
+          })}
           onChange={(e) => setUserEmail(e.target.value)}
           value={userEmail}
         />
@@ -56,8 +59,7 @@ export default function Login() {
               value: 8,
               message: `Минимальная длина пароля: 8. Вы ввели: ${userPassword.length}.`,
             },
-            })
-          }
+          })}
           onChange={(e) => setUserPassword(e.target.value)}
           value={userPassword}
         />

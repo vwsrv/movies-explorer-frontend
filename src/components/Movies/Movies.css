@@ -1,3 +1,15 @@
 .section__movies {
     margin: 0 70px 0;
 }
+
+@media screen and (max-width: 769px) {
+    .section__movies {
+        margin: 0 30px 0;
+    }
+}
+
+@media screen and (max-width: 651px) {
+    .section__movies {
+        margin: 0 14px 0;
+    }
+}

@@ -1,9 +1,9 @@
 .film {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: 
-    'info info'
-    'image image';
+    grid-template-areas:
+        'info info'
+        'image image';
     max-width: 364px;
     border-radius: 6px;
     color: white;
@@ -12,13 +12,20 @@
 }
 
 .film__image {
+    border-radius: 6px;
     justify-self: center;
     padding: 0;
     margin: 0;
     grid-area: image;
-    max-width: 364px;
+    width: 100%;
     max-height: 203px;
     object-fit: cover;
+}
+
+@media screen and (max-width: 769px) {
+    .film {
+        max-width: 339px;
+    }
 }
 
 .film__info {
@@ -69,7 +76,24 @@
 }
 
 .film__like-btn_delete {
+    transition: .4s;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    min-width: 30px;
+    min-height: 30px;
+    outline: none;
+    border: 1px solid grey;
+    border-radius: 20px;
+    background: none;
+    background-size: 10px 13px;
     background-image: url('../../../images/like-btn_remove.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.film__like-btn_delete:hover {
+    opacity: .5;
 }
 
 .film__duration {

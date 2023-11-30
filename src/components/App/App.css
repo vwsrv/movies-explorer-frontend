@@ -9,3 +9,12 @@
     -moz-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
 }
+
+a:hover {
+    transition: .3s;
+    opacity: .7;
+}
+
+html {
+  scroll-behavior: smooth;
+}
