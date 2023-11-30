@@ -5,7 +5,10 @@ export default function Portfolio() {
     <section className="portfolio">
       <p className="portfolio__title">Портфолио</p>
       <div className="project__item">
-        <a href="#" className="project__link">
+        <a
+          href="https://github.com/vwsrv/how-to-learn"
+          className="project__link"
+        >
           <p className="project__name">Статичный сайт</p>
           <img
             src={linkImage}
@@ -15,7 +18,10 @@ export default function Portfolio() {
         </a>
       </div>
       <div className="project__item">
-        <a href="#" className="project__link">
+        <a
+          href="https://github.com/vwsrv/russian-travel"
+          className="project__link"
+        >
           <p className="project__name">Адаптивный сайт</p>
           <img
             src={linkImage}
@@ -25,7 +31,10 @@ export default function Portfolio() {
         </a>
       </div>
       <div className="project__item">
-        <a href="#" className="project__link">
+        <a
+          href="https://github.com/vwsrv/mesto-project-full"
+          className="project__link"
+        >
           <p className="project__name">Одностраничное приложение</p>
           <img
             src={linkImage}

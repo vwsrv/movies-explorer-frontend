@@ -1,5 +1,5 @@
 import Auth from "../Auth/Auth";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { emailAngular, passwordPattern } from "../../utils/constants";
 
@@ -28,6 +28,7 @@ export default function Register() {
         <input
           type="text"
           className="auth__input auth__input_type-name"
+          placeholder="Имя"
           {...register("name", {
             required: "Заполните это поле.",
             minLength: {
@@ -52,6 +53,7 @@ export default function Register() {
         <input
           type="text"
           className="auth__input auth__input_type-email"
+          placeholder="E-mail"
           {...register("email", {
             required: "Заполните это поле.",
             pattern: {
@@ -72,6 +74,7 @@ export default function Register() {
         <input
           type="text"
           className="auth__input auth__input_type-password"
+          placeholder="Пароль"
           {...register("password", {
             required: "Заполните это поле",
             minLength: {

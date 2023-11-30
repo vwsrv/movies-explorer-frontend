@@ -11,7 +11,7 @@
     margin: 0 40px 0 0;
     text-decoration: none;
     color: white;
-    border: none;
+    border-bottom: 1px solid white;
     background: none;
     cursor: pointer;
     font-size: 13px;

@@ -15,7 +15,9 @@ export default function Auth({
 
   return (
     <div className="auth">
-      <img src={authLogo} alt="" className="auth__logo" />
+      <NavLink to="/">
+        <img src={authLogo} alt="" className="auth__logo" />
+      </NavLink>
       <h2 className="auth__title">{title}</h2>
       <form className="auth__form auth__form_type-register" onSubmit={onSubmit}>
         {children}

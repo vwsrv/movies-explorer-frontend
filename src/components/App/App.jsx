@@ -15,7 +15,7 @@ export default function App() {
   const [loggedIn, setIsLoggedIn] = useState(false);
 
   function handleLogin() {
-    setIsLoggedIn(true)
+    setIsLoggedIn(true);
     navigate("/", { replace: true });
   }
 

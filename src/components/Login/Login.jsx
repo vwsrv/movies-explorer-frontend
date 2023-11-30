@@ -32,6 +32,7 @@ export default function Login({ onLogin }) {
         <input
           type="text"
           className="auth__input auth__input_type-email"
+          placeholder="E-mail"
           {...register("email", {
             required: "Заполните это поле.",
             pattern: {
@@ -53,6 +54,7 @@ export default function Login({ onLogin }) {
         <input
           type="text"
           className="auth__input auth__input_type-password"
+          placeholder="Пароль"
           {...register("password", {
             required: "Заполните это поле.",
             minLength: {

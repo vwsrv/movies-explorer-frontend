@@ -10,13 +10,20 @@ export default function Header({ loggedIn }) {
   return (
     hiddenRoutes.includes(location.pathname) && (
       <header
-        className={isMainPage ?"header header__theme_default" : "header header__theme_dark"}>
+        className={
+          isMainPage
+            ? "header header__theme_default"
+            : "header header__theme_dark"
+        }
+      >
         <div className="header__container">
-          <img
-            src={headerLogo}
-            alt="Логотип сайта"
-            className="header__logo"
-          ></img>
+          <NavLink to="/">
+            <img
+              src={headerLogo}
+              alt="Логотип сайта"
+              className="header__logo"
+            ></img>
+          </NavLink>
           {!loggedIn ? (
             <div className="header__links">
               <NavLink
@@ -32,8 +39,9 @@ export default function Header({ loggedIn }) {
                 Войти
               </NavLink>
             </div>
-          ) :
-          <Navigation />}
+          ) : (
+            <Navigation />
+          )}
         </div>
       </header>
     )

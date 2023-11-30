@@ -36,11 +36,7 @@ export default function BurgerMenu() {
               isMobile ? "menu__links menu__links_type-mobile" : "menu__links"
             }
           >
-            <NavLink
-              to="/"
-              className="menu__link"
-              onClick={toggleBurgerManu}
-            >
+            <NavLink to="/" className="menu__link" onClick={toggleBurgerManu}>
               Главная
             </NavLink>
             <NavLink

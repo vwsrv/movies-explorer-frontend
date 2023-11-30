@@ -17,10 +17,7 @@ export default function Navigation() {
             <NavLink to="/movies" className="nav__link">
               Фильмы
             </NavLink>
-            <NavLink
-              to="/saved-movies"
-              className="nav__link"
-            >
+            <NavLink to="/saved-movies" className="nav__link">
               Сохраненные фильмы
             </NavLink>
           </div>

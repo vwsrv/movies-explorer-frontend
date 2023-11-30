@@ -19,7 +19,7 @@ export default function AboutMe() {
           alt="Фотография разработчика"
           className="person__photo"
         />
-        <a href="#" className="person__website">
+        <a href="https://github.com/vwsrv/" className="person__website">
           Github
         </a>
       </div>
