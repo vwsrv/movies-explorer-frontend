@@ -1,69 +1,24 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+@import url('./vendor/normalize.css');
+@import url('./vendor/fonts/fonts.css');
+@import url('./components/Header/Header.css');
+@import url('./components/App/App.css');
+@import url('./components/Main/Main.css');
+@import url('./components/Main/Promo/promo.css');
+@import url('./components/Main/NavTab/NavTab.css');
+@import url('./components/Main/AboutProject/AboutProject.css');
+@import url('./components/Main/AboutMe/AboutMe.css');
+@import url('./components/Main/Techs/Tech.css');
+@import url('./components/Main/Portfolio/Portfolio.css');
+@import url('./components/Footer/Footer.css');
+@import url('./components/Movies/SearchForm/SearchForm.css');
+@import url('./components/Movies/Movies.css');
+@import url('./components/Movies/MoviesCard/MoviesCard.css');
+@import url('./components/Movies/MoviesCardList/MoviesCardList.css');
+@import url('./components/Movies/Preloader/Preloader.css');
+@import url('./components/SavedMovies/SavedMovies.css');
+@import url('./components/Profile/Profile.css');
+@import url('./components/NotFoundPage/NotFoundPage.css');
+@import url('./components/Navigation/Navigation.css');
+@import url('./components/Auth/Auth.css');
+@import url('./components/BurgerMenu/BurgerMenu.css');
+/* * { outline: 1px solid red; } */
