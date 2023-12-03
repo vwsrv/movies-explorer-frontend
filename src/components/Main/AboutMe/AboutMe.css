@@ -1,9 +1,8 @@
 .about {
-    margin: 0 70px 0;
+    margin: 112px 70px 0;
 }
 
 .about__person {
-    column-gap: 18.75%;
     display: grid;
     grid-template-areas:
         "name photo"
@@ -26,23 +25,31 @@
 }
 
 .person__about {
+    margin: 0;
+    padding: 0;
     grid-area: about;
     font-size: 18px;
     font-weight: 500;
     line-height: 20px;
+    letter-spacing: 0px;
     text-align: left;
 }
 
 .person__carrer {
+    margin: 0;
+    padding: 0;
     grid-area: carrer;
     font-size: 14px;
     font-weight: 400;
     line-height: 22px;
     letter-spacing: 0px;
     text-align: left;
+    max-width: 600px;
 }
 
 .person__website {
+    margin: 0;
+    padding: 0;
     align-self: end;
     grid-area: website;
     text-decoration: none;
@@ -56,7 +63,6 @@
     grid-row: 1/2;
     grid-area: photo;
     align-self: end;
-    ;
     justify-self: end;
     border-radius: 10px;
     max-width: 270px;
@@ -66,7 +72,7 @@
 
 @media screen and (max-width: 769px) {
     .about {
-        margin: 0 50px 0;
+        margin: 87px 45px 0;
     }
 
     .person__name {
@@ -82,6 +88,7 @@
     .person__about {
         font-size: 12px;
         line-height: 18px;
+        max-width: 364px;
     }
 
     .person__photo {
@@ -92,8 +99,8 @@
 
 @media screen and (max-width: 651px) {
     .about {
-        margin: 0 14px 0;
-        padding-top: 70px;
+        margin: 0 16px 20px;
+        padding-top: 75px;
     }
 
     .about__person {
@@ -129,9 +136,6 @@
         justify-self: center;
         min-width: 100%;
         margin: 0 0 20px;
-    }
-
-    .person__website {
-        margin: 20px 0 0;
+        min-height: 352px;
     }
 }

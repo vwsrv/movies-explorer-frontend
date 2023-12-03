@@ -1,7 +1,7 @@
 .tech {
     padding: 100px 0 100px;
     background-color: rgba(39, 39, 39, 1);
-    margin: 0 0 100px;
+    margin: 0;
 }
 
 .tech__container {
@@ -15,6 +15,7 @@
     font-size: 50px;
     font-weight: 400;
     line-height: 58px;
+    letter-spacing: -0.04em;
     text-align: center;
 }
 
@@ -26,12 +27,13 @@
     line-height: 20px;
     text-align: center;
     letter-spacing: -0.04em;
+    max-width: 460px;
 }
 
 .tech__stack {
     display: flex;
     justify-content: center;
-    margin: 100px 0 0;
+    margin: 97px 0 0;
     padding: 0;
 }
 
@@ -40,9 +42,9 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(48, 48, 48, 1);
-    margin: 0 10px 0;
+    margin: 0 7px 0 0;
     padding: 0;
-    width: 94px;
+    width: 93px;
     height: 60px;
     border-radius: 10px;
     list-style-type: none;
@@ -52,20 +54,31 @@
     letter-spacing: -0.04em;
 }
 
+.stack__name:nth-last-child(1) {
+    margin: 0;
+}
+
 @media screen and (max-width: 769px) {
     .tech {
         padding: 90px 0 90px;
-        margin: 0 0 90px;
+    }
+
+    .tech__subtitle {
+        margin-top: 78px;
     }
 
     .tech__container {
-        margin: 0 50px 0;
+        margin: 0 44px 0;
     }
 
     .tech_brief {
         font-size: 12px;
         line-height: 18px;
         max-width: 460px;
+    }
+
+    .tech__stack {
+        margin-top: 80px;
     }
 
     .stack__name {
@@ -76,7 +89,7 @@
 
 @media screen and (max-width: 651px) {
     .tech {
-        padding: 70px 0 70px;
+        padding: 65px 0 70px;
         margin: 0;
     }
 
@@ -105,5 +118,7 @@
 
     .stack__name {
         margin: 0;
+        width: 85px;
+        height: 55px
     }
 }

@@ -8,6 +8,8 @@ export default function Portfolio() {
         <a
           href="https://github.com/vwsrv/how-to-learn"
           className="project__link"
+          rel="noreferrer"
+          target="_blank"
         >
           <p className="project__name">Статичный сайт</p>
           <img
@@ -20,6 +22,8 @@ export default function Portfolio() {
       <div className="project__item">
         <a
           href="https://github.com/vwsrv/russian-travel"
+          rel="noreferrer"
+          target="_blank"
           className="project__link"
         >
           <p className="project__name">Адаптивный сайт</p>
@@ -34,6 +38,8 @@ export default function Portfolio() {
         <a
           href="https://github.com/vwsrv/mesto-project-full"
           className="project__link"
+          rel="noreferrer"
+          target="_blank"
         >
           <p className="project__name">Одностраничное приложение</p>
           <img

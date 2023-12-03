@@ -12,6 +12,7 @@ export default function Tech() {
           <li className="stack__name">HTML</li>
           <li className="stack__name">CSS</li>
           <li className="stack__name">JS</li>
+          <li className="stack__name">React</li>
           <li className="stack__name">Git</li>
           <li className="stack__name">Express.js</li>
           <li className="stack__name">mongoDB</li>
