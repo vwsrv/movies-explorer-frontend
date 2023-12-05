@@ -2,8 +2,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-        'info info'
-        'image image';
+        'image image'
+        'info info';
     max-width: 364px;
     border-radius: 6px;
     color: white;
@@ -18,14 +18,7 @@
     margin: 0;
     grid-area: image;
     width: 100%;
-    max-height: 203px;
     object-fit: cover;
-}
-
-@media screen and (max-width: 769px) {
-    .film {
-        max-width: 339px;
-    }
 }
 
 .film__info {
@@ -34,7 +27,8 @@
     grid-template-columns: max-content 26px;
     justify-content: space-between;
     align-content: center;
-    margin: 16px 16px 10px;
+    margin: 15px 18px 0;
+    padding-bottom: 20px;
 }
 
 .film__title {
@@ -55,13 +49,11 @@
     min-width: 30px;
     min-height: 30px;
     outline: none;
-    border: 1px solid grey;
-    border-radius: 20px;
+    border: none;
     background: none;
-    background-size: 10px 13px;
-    background-image: url('../../../images/like_button_bookmark.svg');
+    background-image: url('../../../images/like__button-incative.svg');
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top;
 }
 
 .film__like-btn:hover {
@@ -71,8 +63,7 @@
 }
 
 .film__like-btn_active {
-    background-color: rgba(43, 224, 128, 1);
-    background-image: url('../../../images/like-bookmark_active.svg');
+    background-image: url('../../../images/like__button.svg');
 }
 
 .film__like-btn_delete {
@@ -105,4 +96,15 @@
     letter-spacing: 0px;
     text-align: left;
     color: rgba(139, 139, 139, 1);
+}
+
+@media screen and (max-width: 769px) {
+    .film {
+        max-width: 339px;
+    }
+}
+
+@media screen and (max-width: 651px) {
+    .film {
+    }
 }

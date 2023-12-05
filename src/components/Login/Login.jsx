@@ -52,7 +52,7 @@ export default function Login({ onLogin }) {
       <label htmlFor="password" className="auth__field">
         <span className="auth__input_name">Пароль</span>
         <input
-          type="text"
+          type="password"
           className="auth__input auth__input_type-password"
           placeholder="Пароль"
           {...register("password", {

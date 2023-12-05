@@ -1,9 +1,8 @@
 .movies {
-    margin: 70px auto 0;
+    margin: 80px auto 0;
     padding-bottom: 10px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, 1fr);
     column-gap: 24px;
     row-gap: 37px;
 }
@@ -12,7 +11,7 @@
     .movies {
         grid-template-columns: repeat(2, 1fr);
         gap: 30px;
-        margin: 60px auto 0;
+        margin: 80px auto 0;
         padding-bottom: 30px;
     }
 }
@@ -22,7 +21,6 @@
         grid-template-columns: 1fr;
         justify-items: center;
         gap: 14px;
-        margin: 40px auto 0;
-        padding-bottom: 26px;
+        margin: 50px auto 0;
     }
 }

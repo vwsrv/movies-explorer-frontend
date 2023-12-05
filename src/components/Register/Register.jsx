@@ -18,7 +18,7 @@ export default function Register() {
   return (
     <Auth
       title="Добро пожаловать!"
-      buttonText="Регистрация"
+      buttonText="Зарегистрироваться"
       authText="Уже зарегистрированы?"
       linkText="Войти"
       isValid={isValid}
@@ -72,7 +72,7 @@ export default function Register() {
       <label htmlFor="password" className="auth__field">
         <span className="auth__input_name">Пароль</span>
         <input
-          type="text"
+          type="password"
           className="auth__input auth__input_type-password"
           placeholder="Пароль"
           {...register("password", {

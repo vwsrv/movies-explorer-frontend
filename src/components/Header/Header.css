@@ -19,7 +19,7 @@
 }
 
 .header__logo {
-    margin: 0 40px 0 0;
+    margin: 0 46px 0 0;
     min-width: 38px;
     height: 38px;
     padding: 0;
@@ -62,7 +62,7 @@
 
 @media screen and (max-width: 769px) {
     .header {
-        padding: 0 30px;
+        padding: 0 22px;
     }
 }
 

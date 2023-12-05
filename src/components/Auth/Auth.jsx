@@ -24,9 +24,12 @@ export default function Auth({
         <button
           type="submit"
           className={
-            isValid
+            (isValid
               ? "auth__submit-btn"
-              : "auth__submit-btn auth__submit-btn_inactive"
+              : "auth__submit-btn auth__submit-btn_inactive") &&
+            isRegister
+              ? "auth__submit-btn auth__submit-btn_type-register"
+              : "auth__submit-btn auth__submit-btn_type-login"
           }
         >
           {buttonText}

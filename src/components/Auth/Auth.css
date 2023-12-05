@@ -34,7 +34,7 @@
     display: flex;
     flex-direction: column;
     padding: 0;
-    margin: 0 0 10px;
+    margin: 0;
 }
 
 .auth__field:nth-last-child(1) {
@@ -53,8 +53,8 @@
 
 .auth__input {
     color: white;
-    padding: 0 10px 0;
-    margin: 0 0 10px;
+    padding: 0 15px 0;
+    margin: 0 0 3px;
     border-radius: 8px;
     min-height: 46px;
     font-size: 13px;
@@ -68,11 +68,15 @@
     outline: 0;
 }
 
+.auth__input_type-error {
+    color: rgba(238, 52, 101, 1);
+}
+
 .auth__input-error {
     transition: .3s;
     margin: 0;
     padding: 0;
-    color: red;
+    color: rgba(238, 52, 101, 1);
     font-size: 10px;
     font-weight: 400;
     line-height: 12px;
@@ -82,7 +86,8 @@
 
 .auth__submit-btn {
     transition: .3s;
-    margin: 69px 0 0;
+    margin: 0;
+    padding: 0;
     cursor: pointer;
     border-radius: 3px;
     min-height: 45px;
@@ -108,6 +113,14 @@
     -ms-user-select: none;
     background-color: rgb(83, 83, 83);
     color: rgb(223, 220, 220);
+}
+
+.auth__submit-btn_type-register {
+    margin-top: 65px;
+}
+
+.auth__submit-btn_type-login {
+    margin-top: 155px
 }
 
 .auth__submit-btn_inactive:hover {
@@ -138,7 +151,7 @@
     text-decoration: none;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 651px) {
     .auth {
         max-width: 396px;
         color: white;
@@ -151,12 +164,22 @@
     }
 
     .auth__submit-btn {
-        margin-top: 157px;
+        font-size: 12px;
+        line-height: 15px;
+        
+    }
+
+    .auth__submit-btn_type-login {
+        margin-top: 244px;
+    }
+
+    .auth__submit-btn_type-register {
+        margin-top: 155px;
     }
 
     .auth__logo {
         display: flex;
-        margin: 0 auto 40px;
+        margin: 0 auto 51px;
     }
 
     .auth__title {
