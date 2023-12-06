@@ -59,20 +59,20 @@ export default function BurgerMenu() {
               onClick={toggleBurgerManu}
             >
               Аккаунт
-              <span className="link__profile-logo_type-burger" />
+              <span className="menu__link-profile--image" />
             </NavLink>
           </nav>
         </animated.div>
         <button
           type="button"
           className={
-            isActiveBurger ? "burger__menu burger__menu_active" : "burger__menu"
+            isActiveBurger ? "burgermenu-btn burgermenu-btn_active" : "burgermenu-btn"
           }
           onClick={toggleBurgerManu}
         >
-          <span className="burger__menu-line"></span>
-          <span className="burger__menu-line"></span>
-          <span className="burger__menu-line"></span>
+          <span className="burgermenu-btn--span"></span>
+          <span className="burgermenu-btn--span"></span>
+          <span className="burgermenu-btn--span"></span>
         </button>
       </div>
     )

@@ -14,10 +14,20 @@ export default function Footer() {
         <div className="footer__container">
           <p className="footer__copyright">© 2020</p>
           <nav className="footer__links">
-            <a href="https://practicum.yandex.ru/" className="footer__link">
+            <a
+              href="https://practicum.yandex.ru/"
+              className="footer__link"
+              target="_blank"
+              rel="noreferrer"
+            >
               Яндекс.Практикум
             </a>
-            <a href="https://github.com/vwsrv" className="footer__link">
+            <a
+              href="https://github.com/vwsrv"
+              className="footer__link"
+              target="_blank"
+              rel="noreferrer"
+            >
               Github
             </a>
           </nav>

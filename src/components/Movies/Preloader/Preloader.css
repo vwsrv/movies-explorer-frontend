@@ -1,7 +1,7 @@
 .preloader {
     display: flex;
     flex-direction: column;
-    margin: 50px auto 80px;
+    margin: 60px auto 80px;
 }
 
 .preloader-btn {
@@ -20,4 +20,10 @@
 
 .preloader-btn:hover {
     opacity: .7;
+}
+
+@media screen and (max-width: 769px) {
+    .preloader {
+        margin: 82px auto 80px;
+    }
 }

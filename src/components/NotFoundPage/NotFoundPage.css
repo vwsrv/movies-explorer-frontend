@@ -2,7 +2,7 @@
     color: white;
     margin: auto;
     text-align: center;
-    margin: 35vh auto 35vh;
+    margin: 35vh auto 22vh;
 }
 
 .notfound__title {
@@ -25,7 +25,10 @@
     text-align: center;
 }
 
-.notfound__link {
+.notfound__button {
+    background: none;
+    outline: none;
+    border: none;
     margin: auto;
     padding: 0;
     text-decoration: none;

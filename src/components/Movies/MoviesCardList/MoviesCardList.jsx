@@ -5,7 +5,6 @@ export default function MoviesCardList() {
     <section className="movies-cards">
       <MoviesCard />
       <MoviesCard />
-      <MoviesCard />
     </section>
   );
 }

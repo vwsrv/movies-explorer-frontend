@@ -52,7 +52,7 @@
     outline: none;
 }
 
-.profile__input_name {
+.profile__input-name {
     font-size: 11px;
     font-weight: 500;
     line-height: 13px;
@@ -91,7 +91,7 @@
 }
 
 .profile__signout-btn {
-    margin: 16px 0 0;
+    margin: 15px 0 0;
     text-decoration: none;
     color: rgba(238, 52, 101, 1);
     font-weight: 500;
@@ -99,7 +99,7 @@
 
 @media screen and (max-width: 769px) {
     .profile {
-        margin: 18vh auto 10vh;
+        margin: 236px auto 10vh;
     }
 
     .profile__title {
@@ -125,7 +125,7 @@
     }
 
     .profile__field:nth-child(2) {
-        margin: 0 0 29vh;
+        margin: 0 0 377px;
     }
 
     .profile__button {

@@ -30,7 +30,7 @@
     position: absolute;
     align-items: center;
     height: 100%;
-    width: 66%;
+    width: 68%;
     top: 0;
     right: 0;
     background: rgba(32, 32, 32, 1);
@@ -41,7 +41,7 @@
 }
 
 .menu__link {
-    margin: 0 0 23px;
+    margin: 0 0 27px;
     text-decoration: none;
     color: white;
     font-size: 18px;
@@ -66,13 +66,14 @@
     font-weight: 500;
     line-height: 12px;
     letter-spacing: 0px;
-    display: flex;
+    display: grid;
+    grid-template-columns: max-content 22px;
     position: absolute;
     align-items: center;
-    bottom: 15%;
+    bottom: 32.4%;
 }
 
-.link__profile-logo_type-burger {
+.menu__link-profile--image {
     background-color: rgba(49, 49, 49, 1);
     background-image: url('../../images/profile__logo.svg');
     background-repeat: no-repeat;
@@ -83,7 +84,7 @@
     margin-left: 8px;
 }
 
-.burger__menu {
+.burgermenu-btn {
     z-index: 999;
     margin: 0;
     width: 30px;
@@ -95,12 +96,102 @@
     transition: opacity 0.4s ease;
 }
 
-.burger__menu_active {
+.burgermenu-btn_active {
     position: fixed;
 }
 
+/* @media screen and (max-width: 769px) {
+    .burgermenu-btn--span {
+        display: block;
+        margin: 0;
+        position: absolute;
+        width: 27px;
+        height: 2.5px;
+        transition: 0.2s;
+        background-color: white;
+    }
+
+    .burgermenu-btn--span:nth-child(1) {
+        right: 8px;
+        top: 3px;
+    }
+
+    .burgermenu-btn--span:nth-child(2) {
+        right: 8px;
+        top: 13px
+    }
+
+    .burgermenu-btn--span:nth-child(3) {
+        right: 8px;
+        top: 23px
+    }
+
+    .burgermenu-btn_active .burgermenu-btn--span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burgermenu-btn_active .burgermenu-btn--span:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+
+    .burgermenu-btn_active .burgermenu-btn--span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+} */
+
 @media screen and (max-width: 769px) {
-    .burger__menu-line {
+    .burgermenu-btn--span {
+        display: block;
+        margin: 0;
+        position: absolute;
+        width: 27px;
+        height: 2.5px;
+        transition: 0.2s;
+        background-color: white;
+    }
+
+    .burgermenu-btn--span:nth-child(1) {
+        right: 8px;
+        top: 3px;
+    }
+
+    .burgermenu-btn--span:nth-child(2) {
+        right: 8px;
+        top: 13px
+    }
+
+    .burgermenu-btn--span:nth-child(3) {
+        right: 8px;
+        top: 23px
+    }
+
+    .burgermenu-btn_active .burgermenu-btn--span:nth-child(2) {
+        opacity: 0;
+        right: -3px;
+        top: 13px;
+        width: 22px;
+        height: 2.5px;
+    }
+
+    .burgermenu-btn_active .burgermenu-btn--span:nth-child(1) {
+        transform: translateY(9px) rotate(46deg);
+        right: -3px;
+        top: 5px;
+        width: 22px;
+        height: 2.5px;
+    }
+
+    .burgermenu-btn_active .burgermenu-btn--span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+        right: -3px;
+        top: 23px;
+        width: 22px;
+        height: 2.5px;
+    }
+}
+
+@media screen and (max-width: 651px) {
+    .burgermenu-btn--span {
         display: block;
         margin: 0;
         position: absolute;
@@ -110,36 +201,15 @@
         background-color: white;
     }
 
-    .burger__menu-line:nth-child(1) {
-        right: 4px;
-        top: 5px;
+    .menu__links {
+        padding: 153px 0 0;
     }
 
-    .burger__menu-line:nth-child(2) {
-        right: 4px;
-        top: 14px
+    .menu__link {
+        margin: 0 0 22px;
     }
-
-    .burger__menu-line:nth-child(3) {
-        right: 4px;
-        top: 23px
-    }
-
-    .burger__menu_active .burger__menu-line:nth-child(2) {
-        opacity: 0;
-    }
-
-    .burger__menu_active .burger__menu-line:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
-    }
-
-    .burger__menu_active .burger__menu-line:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
-    }
-}
-
-@media screen and (max-width: 651px) {
-    .burger__menu-line {
-
+    
+    .menu__link:nth-last-child(1) {
+        margin-bottom: 235px;
     }
 }

@@ -15,27 +15,36 @@ export default function Profile({ onLogout }) {
   });
 
   return (
-    <div className="profile">
+    <main className="profile">
       <h1 className="profile__title">Привет, Виталий!</h1>
       <form className="profile__form">
         <label htmlFor="user-name" className="profile__field">
-          <p className="profile__input_name">Имя</p>
+          <span className="profile__input-name">Имя</span>
           <input
+            id='user-name'
             type="text"
             className="profile__input profile__input_type-name"
             {...register("name", {
               required: "Заполните все поля.",
+              minLength: {
+                value: 2,
+                message: `Минимальная длина имени: 2. Вы ввели: ${userName.length}.`,
+              },
+              maxLength: {
+                value: 40,
+                message: `Максимальная длина имени: 40. Вы ввели: ${userName.length}.`,
+              },
             })}
             value={userName || ""}
             onChange={(e) => setUserName(e.target.value)}
             autoComplete="off"
-            id="name-input"
             placeholder="Введите имя"
           />
         </label>
         <label htmlFor="user-email" className="profile__field">
-          <p className="profile__input_name">E-mail</p>
+          <span className="profile__input-name">E-mail</span>
           <input
+            id='user-email'
             type="text"
             className="profile__input profile__input_type-email"
             {...register("email", {
@@ -48,7 +57,6 @@ export default function Profile({ onLogout }) {
             onChange={(e) => setUserEmail(e.target.value)}
             autoComplete="off"
             value={userEmail || ""}
-            id="email-input"
             placeholder="Введите E-mail"
           />
         </label>
@@ -62,13 +70,12 @@ export default function Profile({ onLogout }) {
         </button>
         <button
           type="button"
-          href="#"
           className="profile__button profile__signout-btn"
           onClick={onLogout}
         >
           Выйти из аккаунта
         </button>
       </form>
-    </div>
+    </main>
   );
 }

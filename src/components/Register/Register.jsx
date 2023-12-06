@@ -1,7 +1,7 @@
 import Auth from "../Auth/Auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { emailAngular, passwordPattern } from "../../utils/constants";
+import { emailAngular } from "../../utils/constants";
 
 export default function Register() {
   const [userName, setUserName] = useState("");
@@ -27,7 +27,7 @@ export default function Register() {
       <label htmlFor="user-name" className="auth__field">
         <span className="auth__input-name">Имя</span>
         <input
-          id="name-input"
+          id="user-name"
           type="text"
           className="auth__input auth__input_type-name"
           placeholder="Имя"
@@ -50,7 +50,7 @@ export default function Register() {
           </span>
         )}
       </label>
-      <label htmlFor="user" className="auth__field">
+      <label htmlFor="email-input" className="auth__field">
         <span className="auth__input-name">E-mail</span>
         <input
           id="email-input"
@@ -72,7 +72,7 @@ export default function Register() {
           </span>
         )}
       </label>
-      <label htmlFor="password" className="auth__field">
+      <label htmlFor="password-input" className="auth__field">
         <span className="auth__input-name">Пароль</span>
         <input
           id="password-input"
@@ -84,11 +84,6 @@ export default function Register() {
             minLength: {
               value: 8,
               message: `Минимальная длина пароля: 8. Вы ввели: ${userPassword.length}.`,
-            },
-            pattern: {
-              value: passwordPattern,
-              message:
-                "Пароль должен содержать как минимум 1 строчную и 1 заглавную букву, 1 цифру и символы @$!%*?&",
             },
           })}
           onChange={(e) => setUserPassword(e.target.value)}

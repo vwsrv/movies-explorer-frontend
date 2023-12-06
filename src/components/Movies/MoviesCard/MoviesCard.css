@@ -1,34 +1,38 @@
 .film {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     grid-template-areas:
-        'image image'
-        'info info';
+        'image'
+        'info';
     max-width: 364px;
     border-radius: 6px;
     color: white;
     background-color: rgba(34, 34, 34, 1);
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.08);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .film__image {
-    border-radius: 6px;
-    justify-self: center;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
     padding: 0;
-    margin: 0;
-    grid-area: image;
+    margin: 0 auto;
     width: 100%;
+    height: 203px;
     object-fit: cover;
 }
 
 .film__info {
     grid-area: info;
     display: grid;
-    grid-template-columns: max-content 26px;
+    row-gap: 3px;
+    grid-template-columns: max-content min-content;
     justify-content: space-between;
-    align-content: center;
-    margin: 15px 18px 0;
-    padding-bottom: 20px;
+    align-items: start;
+    margin: 14px 18px auto;
+    padding-bottom: 15px;
+    list-style-type: none;
 }
 
 .film__title {
@@ -46,7 +50,7 @@
     padding: 0;
     margin: 0;
     cursor: pointer;
-    min-width: 30px;
+    min-width: 26px;
     min-height: 30px;
     outline: none;
     border: none;
@@ -57,8 +61,6 @@
 }
 
 .film__like-btn:hover {
-    background-color: rgba(43, 224, 128, 1);
-    background-image: url('../../../images/like-bookmark_active.svg');
     opacity: 0.3;
 }
 
@@ -74,13 +76,13 @@
     min-width: 30px;
     min-height: 30px;
     outline: none;
-    border: 1px solid grey;
+    border: none;
     border-radius: 20px;
     background: none;
-    background-size: 10px 13px;
+    background-size: 6.84px 8.72px;
     background-image: url('../../../images/like-btn_remove.svg');
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top;
 }
 
 .film__delete-btn:hover {
@@ -102,9 +104,34 @@
     .film {
         max-width: 339px;
     }
+
+    .film__image {
+        height: 188px;
+    }
+
+    .film__info {
+        padding-bottom: 10px;
+        margin: 14px 15px auto;
+    }
 }
 
 @media screen and (max-width: 651px) {
     .film {
+        min-width: 300px;
+    }
+
+    .film__image {
+        height: 165px;
+    }
+
+
+    .film__title {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .film__duration {
+        font-size: 10px;
+        line-height: 12px;
     }
 }

@@ -3,7 +3,7 @@ import linkImage from "../../../images/main__arrow.svg";
 export default function Portfolio() {
   return (
     <section className="portfolio">
-      <p className="portfolio__title">Портфолио</p>
+      <h2 className="portfolio__title">Портфолио</h2>
       <div className="portfolio__item">
         <a
           href="https://github.com/vwsrv/how-to-learn"

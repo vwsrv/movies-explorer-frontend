@@ -15,10 +15,6 @@
     border-radius: 40px;
 }
 
-.search__field:hover {
-    opacity: .7;
-}
-
 .search__input {
     font-size: 13px;
     font-weight: 400;
@@ -27,7 +23,8 @@
     text-align: left;
     color: white;
     outline: none;
-    margin: 0 0 0 22px;
+    margin: 0;
+    padding: 0 0 0 22px;
     min-height: 46px;
     border-radius: 40px;
     width: 100%;
@@ -35,10 +32,15 @@
     border: 0;
 }
 
+.search__input:focus {
+    outline: 1px solid rgba(66, 133, 244, 1);
+    opacity: 10;
+}
+
 .search__form-btn {
     cursor: pointer;
     position: absolute;
-    right: 1%;
+    right: 6px;
     transform: translateY(20%);
     background: 0;
     border: 0;
@@ -53,7 +55,7 @@
 
 .search__toggle {
     margin: 39px 0 0;
-    padding: 0 0 70px;
+    padding: 0 0 71px;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid rgba(66, 66, 66, 1);
@@ -68,9 +70,11 @@
 }
 
 .search__span {
+    transition: .4s;
+    cursor: pointer;
     display: inline-block;
     position: relative;
-    padding: 0 0 0 44px;
+    padding: 0 0 0 49px;
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
@@ -84,8 +88,8 @@
     width: 36px;
     height: 20px;
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 0px;
+    top: -2px;
     background-color: rgba(52, 52, 52, 1);
     border-radius: 20px;
 }
@@ -97,9 +101,9 @@
     height: 16px;
     background-color: rgba(245, 245, 245, 1);
     border-radius: 21px;
-    top: 2px;
-    left: 2px;
-    transition: .1s;
+    top: 0px;
+    left: 3px;
+    transition: .2s;
 }
 
 .search__checkbox:checked+.search__span::before {
@@ -109,32 +113,28 @@
 .search__checkbox:checked+.search__span::after {
     background-color: white;
     left: 18px;
-    transition: .1s;
+    transition: .2s;
 }
 
 @media screen and (max-width: 769px) {
     .search {
-        margin-top: 75px;
+        margin-top: 78px;
     }
 
     .search__toggle {
-        padding: 0 0 55px;
+        margin-top: 43px;
+        padding: 0 0 51px;
     }
 }
 
 @media screen and (max-width: 651px) {
     .search {
-        margin-top: 78px;
+        margin-top: 80px;
     }
 
     .search__span {
         font-size: 11px;
         line-height: 18px;
-    }
-
-    .search__toggle {
-        margin: 41px auto 0;
-        padding-bottom: 49px;
     }
 
     .search__input {

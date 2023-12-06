@@ -1,16 +1,17 @@
 export default function SearchForm() {
   return (
-    <section className="search">
-      <form action="" className="search__form">
-        <label htmlFor="movie-text" className="search__field">
+    <div className="search">
+      <form className="search__form">
+        <div className="search__field">
           <input
+            id="movie-text"
             type="text"
             className="search__input"
             placeholder="Фильм"
-            required="true"
+            required={true}
           />
           <button className="search__form-btn" type="button"></button>
-        </label>
+        </div>
         <label htmlFor="search-type" className="search__toggle">
           <input
             type="checkbox"
@@ -20,6 +21,6 @@ export default function SearchForm() {
           <span className="search__span">Короткометражки</span>
         </label>
       </form>
-    </section>
+    </div>
   );
 }

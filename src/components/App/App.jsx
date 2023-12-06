@@ -25,7 +25,7 @@ export default function App() {
   }
 
   return (
-    <body className="page">
+    <div className="page">
       <Header loggedIn={loggedIn} />
       <Routes>
         <Route path="*" element={<NotFoundPage />} />
@@ -37,6 +37,6 @@ export default function App() {
         <Route path="signup" element={<Register />} />
       </Routes>
       <Footer />
-    </body>
+      </div>
   );
 }

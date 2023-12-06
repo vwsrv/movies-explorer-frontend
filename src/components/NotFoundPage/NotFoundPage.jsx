@@ -10,9 +10,9 @@ export default function NotFoundPage() {
     <main className="notfound">
       <h1 className="notfound__title">404</h1>
       <p className="notfound__subtitle">Страница не найдена</p>
-      <a href="#" className="notfound__link" onClick={goBack}>
+      <button type="button" className="notfound__button" onClick={goBack}>
         Назад
-      </a>
+      </button>
     </main>
   );
 }

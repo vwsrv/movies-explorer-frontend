@@ -1,30 +1,33 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import filmExample from "../../../images/example_film.jpg";
-export default function MoviesCard() {
+
+export default function MoviesCard({movieName}) {
   const [isLiked, setIsLiked] = useState(false);
   const filmSaveButtonClassName = `film__like-btn ${
-    (isLiked && `film__like-btn_active`)
+    isLiked && `film__like-btn_active`
   }`;
   const location = useLocation();
   const isSaved = location.pathname === "/saved-movies";
-  
+
   function toggleSave() {
     setIsLiked(!isLiked);
   }
 
   return (
-    <article className="film">
-      <img src={filmExample} alt="Постер фильма" className="film__image"/>
-      <div className="film__info">
+    <ul className="film">
+      <li>
+        <img src={filmExample} alt={`Постер фильма ${movieName}`} className="film__image" />
+      </li>
+      <li className="film__info">
         <h2 className="film__title">Little Women</h2>
         <button
           type="button"
-          className={isSaved ? 'film__delete-btn' : filmSaveButtonClassName }
+          className={isSaved ? "film__delete-btn" : filmSaveButtonClassName}
           onClick={toggleSave}
         ></button>
         <p className="film__duration">1ч 47м</p>
-      </div>
-    </article>
+      </li>
+    </ul>
   );
 }

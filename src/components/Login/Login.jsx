@@ -28,7 +28,7 @@ export default function Login({ onLogin }) {
       onSubmit={handleSubmit(onSubmit)}
       isValid={isValid}
     >
-      <label htmlFor="user" className="auth__field">
+      <label htmlFor="email-input" className="auth__field">
         <span className="auth__input-name">E-mail</span>
         <input
           type="text"
@@ -51,7 +51,7 @@ export default function Login({ onLogin }) {
           </span>
         )}
       </label>
-      <label htmlFor="password" className="auth__field">
+      <label htmlFor="password-input" className="auth__field">
         <span className="auth__input-name">Пароль</span>
         <input
           type="password"

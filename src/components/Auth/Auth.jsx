@@ -15,7 +15,7 @@ export default function Auth({
   const isRegister = location.pathname === "/signup";
 
   return (
-    <div className={`auth auth_form_${name}`}>
+    <main className={`auth auth_form_${name}`}>
       <NavLink to="/">
         <img src={authLogo} alt="Логотип сайта" className="auth__logo" />
       </NavLink>
@@ -24,7 +24,7 @@ export default function Auth({
         {children}
         <button
           type="submit"
-          className={isValid ? `auth__submit-btn auth__submit-btn_type-${name}` : `auth__submit-btn auth__submit-btn_type-${name} auth__submit-btn_inactive`}
+          className={`auth__submit-btn auth__submit-btn_type-${name} ${isValid ? '' : 'auth__submit-btn_inactive'}`}
         >
           {buttonText}
         </button>
@@ -38,6 +38,6 @@ export default function Auth({
           </NavLink>
         </div>
       </form>
-    </div>
+    </main>
   );
 }
