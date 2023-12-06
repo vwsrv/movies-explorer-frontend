@@ -4,10 +4,10 @@ import Preloader from "./Preloader/Preloader";
 
 export default function Movies() {
   return (
-    <section className="section__movies">
+    <main className="movies">
       <SearchForm />
       <MoviesCardList />
       <Preloader />
-    </section>
+    </main>
   );
 }

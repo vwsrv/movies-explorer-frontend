@@ -4,19 +4,19 @@
 }
 
 .search__form {
-    border-radius: 40px;
     position: relative;
-    background-color: rgba(47, 47, 47, 1);
     min-width: 292px;
-}
-
-.search__form:hover {
-    background-color: rgb(49, 49, 49);
 }
 
 .search__field {
     display: flex;
     justify-content: space-between;
+    background-color: rgba(47, 47, 47, 1);
+    border-radius: 40px;
+}
+
+.search__field:hover {
+    opacity: .7;
 }
 
 .search__input {
@@ -45,6 +45,10 @@
     background-image: url('../../../images/search__button.svg');
     width: 34px;
     height: 34px;
+}
+
+.search__form-btn:hover {
+    opacity: .7;
 }
 
 .search__toggle {

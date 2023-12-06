@@ -2,11 +2,11 @@
     padding: 0 70px;
 }
 
-.header__theme_default {
+.header_theme_default {
     background-color: rgba(7, 48, 66, 1);
 }
 
-.header__theme_dark {
+.header_theme_dark {
     background-color: rgba(32, 32, 32, 1);
 }
 
@@ -45,12 +45,12 @@
     cursor: pointer;
 }
 
-.header__link_type-signup {
+.header__link--type-signup {
     height: 16px;
     margin: 0 30px 0 0;
 }
 
-.header__link_type-signin {
+.header__link--type-signin {
     display: grid;
     align-content: center;
     color: rgba(0, 0, 0, 1);
@@ -76,11 +76,11 @@
         line-height: 16px;
     }
 
-    .header__link_type-signup {
+    .header__link--type-signup {
         margin-right: 14px;
     }
 
-    .header__link_type-signin {
+    .header__link--type-signin {
         width: 54px;
         height: 26px;
     }

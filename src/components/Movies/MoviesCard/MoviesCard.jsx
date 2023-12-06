@@ -8,18 +8,19 @@ export default function MoviesCard() {
   }`;
   const location = useLocation();
   const isSaved = location.pathname === "/saved-movies";
-
+  
   function toggleSave() {
     setIsLiked(!isLiked);
   }
 
   return (
     <article className="film">
-      <img src={filmExample} alt="Постер фильма" className="film__image" />
+      <img src={filmExample} alt="Постер фильма" className="film__image"/>
       <div className="film__info">
-        <p className="film__title">Little Women</p>
+        <h2 className="film__title">Little Women</h2>
         <button
-          className={isSaved ? 'film__like-btn_delete' : filmSaveButtonClassName }
+          type="button"
+          className={isSaved ? 'film__delete-btn' : filmSaveButtonClassName }
           onClick={toggleSave}
         ></button>
         <p className="film__duration">1ч 47м</p>

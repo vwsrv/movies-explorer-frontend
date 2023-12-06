@@ -3,11 +3,11 @@
     background-color: rgba(39, 39, 39, 1);
 }
 
-.navtab__container {
+.navtab__navigation {
     margin: 24px auto 24px;
 }
 
-.navtab__button {
+.navtab__link {
     margin: 0 40px 0 0;
     text-decoration: none;
     color: white;
@@ -20,12 +20,12 @@
     letter-spacing: 0px;
 }
 
-.navtab__button:nth-last-child(1) {
+.navtab__link:nth-last-child(1) {
     margin: 0;
 }
 
 @media screen and (max-width: 651px) {
-    .navtab__button {
+    .navtab__link {
         font-size: 11px;
     }
 }

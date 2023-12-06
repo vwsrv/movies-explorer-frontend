@@ -12,12 +12,12 @@ export default function Header({ loggedIn }) {
       <header
         className={
           isMainPage
-            ? "header header__theme_default"
-            : "header header__theme_dark"
+            ? "header header_theme_default"
+            : "header header_theme_dark"
         }
       >
         <div className="header__container">
-          <NavLink to="/">
+          <NavLink to="/" className="header__link">
             <img
               src={headerLogo}
               alt="Логотип сайта"
@@ -25,20 +25,20 @@ export default function Header({ loggedIn }) {
             ></img>
           </NavLink>
           {!loggedIn ? (
-            <div className="header__links">
+            <nav className="header__links">
               <NavLink
                 to="/signup"
-                className="header__link header__link_type-signup"
+                className="header__link header__link--type-signup"
               >
                 Регистрация
               </NavLink>
               <NavLink
                 to="/signin"
-                className="header__link header__link_type-signin"
+                className="header__link header__link--type-signin"
               >
                 Войти
               </NavLink>
-            </div>
+            </nav>
           ) : (
             <Navigation />
           )}

@@ -64,6 +64,7 @@ export default function BurgerMenu() {
           </nav>
         </animated.div>
         <button
+          type="button"
           className={
             isActiveBurger ? "burger__menu burger__menu_active" : "burger__menu"
           }

@@ -2,6 +2,16 @@
     margin: 112px 70px 0;
 }
 
+.about__title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 27px;
+    border-bottom: 1px solid rgba(218, 218, 218, 1);
+    padding: 0 0 23px;
+    letter-spacing: -0.04em;
+}
+
 .about__person {
     display: grid;
     grid-template-areas:
@@ -13,7 +23,7 @@
     padding: 0;
 }
 
-.person__name {
+.about__person-name {
     grid-area: name;
     margin: 0;
     padding: 0;
@@ -24,7 +34,7 @@
     text-align: left;
 }
 
-.person__about {
+.about__person-about {
     margin: 0;
     padding: 0;
     grid-area: about;
@@ -35,7 +45,7 @@
     text-align: left;
 }
 
-.person__carrer {
+.about__person-carrer {
     margin: 0;
     padding: 0;
     grid-area: carrer;
@@ -47,7 +57,7 @@
     max-width: 600px;
 }
 
-.person__website {
+.about__person-website {
     margin: 0;
     padding: 0;
     align-self: end;
@@ -59,7 +69,7 @@
     line-height: 17px;
 }
 
-.person__photo {
+.about__person-photo {
     grid-row: 1/2;
     grid-area: photo;
     align-self: end;
@@ -75,23 +85,23 @@
         margin: 87px 45px 0;
     }
 
-    .person__name {
+    .about__person-name {
         font-size: 40px;
         line-height: 40px;
     }
 
-    .person__carrer {
+    .about__person-carrer {
         font-size: 12px;
         line-height: 18px;
     }
 
-    .person__about {
+    .about__person-about {
         font-size: 12px;
         line-height: 18px;
         max-width: 364px;
     }
 
-    .person__photo {
+    .about__person-phoyo {
         max-width: 255px;
         min-height: 307px;
     }
@@ -101,6 +111,10 @@
     .about {
         margin: 0 16px 20px;
         padding-top: 75px;
+    }
+    
+    .about__title {
+        padding: 0 0 28px;
     }
 
     .about__person {
@@ -114,25 +128,25 @@
         gap: 20px;
     }
 
-    .person__name {
+    .about__person-name {
         margin: 0;
         font-size: 30px;
         line-height: 36px;
     }
 
-    .person__about {
+    .about__person-about {
         margin: 0;
         font-size: 11px;
         line-height: 16px;
     }
 
-    .person__carrer {
+    .about__person-carrer {
         margin: 0;
         font-size: 11px;
         line-height: 16px;
     }
 
-    .person__photo {
+    .about__person-photo {
         justify-self: center;
         min-width: 100%;
         margin: 0 0 20px;

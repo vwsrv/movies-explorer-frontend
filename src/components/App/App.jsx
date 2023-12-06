@@ -19,19 +19,24 @@ export default function App() {
     navigate("/", { replace: true });
   }
 
+  function handleLogout() {
+    setIsLoggedIn(false);
+    navigate("/", {replace: true})
+  }
+
   return (
-    <div className="page">
+    <body className="page">
       <Header loggedIn={loggedIn} />
       <Routes>
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<Main />} />
         <Route path="movies" element={<Movies />} />
         <Route path="saved-movies" element={<SavedMovies />} />
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile" element={<Profile onLogout={handleLogout}/>} />
         <Route path="signin" element={<Login onLogin={handleLogin} />} />
         <Route path="signup" element={<Register />} />
       </Routes>
       <Footer />
-    </div>
+    </body>
   );
 }

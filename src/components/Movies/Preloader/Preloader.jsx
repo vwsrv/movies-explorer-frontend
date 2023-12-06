@@ -1,7 +1,9 @@
 export default function Preloader() {
   return (
     <div className="preloader">
-      <button className="preloader-btn">Ещё</button>
+      <button type="button" className="preloader-btn">
+        Ещё
+      </button>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { emailAngular } from "../../utils/constants";
 
-export default function Profile() {
+export default function Profile({ onLogout }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const {
@@ -16,7 +16,7 @@ export default function Profile() {
 
   return (
     <div className="profile">
-      <h2 className="profile__title">Привет, Виталий!</h2>
+      <h1 className="profile__title">Привет, Виталий!</h1>
       <form className="profile__form">
         <label htmlFor="user-name" className="profile__field">
           <p className="profile__input_name">Имя</p>
@@ -29,6 +29,8 @@ export default function Profile() {
             value={userName || ""}
             onChange={(e) => setUserName(e.target.value)}
             autoComplete="off"
+            id="name-input"
+            placeholder="Введите имя"
           />
         </label>
         <label htmlFor="user-email" className="profile__field">
@@ -46,6 +48,8 @@ export default function Profile() {
             onChange={(e) => setUserEmail(e.target.value)}
             autoComplete="off"
             value={userEmail || ""}
+            id="email-input"
+            placeholder="Введите E-mail"
           />
         </label>
         {(errors?.name || errors?.email) && (
@@ -53,10 +57,15 @@ export default function Profile() {
             {errors?.name?.message || errors?.email.message}
           </span>
         )}
-        <button className="profile__button profile__edit-btn">
+        <button className="profile__button profile__edit-btn" type="button">
           Редактировать
         </button>
-        <button href="#" className="profile__button profile__signout-btn">
+        <button
+          type="button"
+          href="#"
+          className="profile__button profile__signout-btn"
+          onClick={onLogout}
+        >
           Выйти из аккаунта
         </button>
       </form>

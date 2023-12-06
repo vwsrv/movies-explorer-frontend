@@ -1,6 +1,6 @@
 .profile {
     color: white;
-    margin: 20vh auto 15vh;
+    margin: 0 auto;
     padding: 0;
 }
 
@@ -20,6 +20,7 @@
     margin: auto;
     padding: 0;
     max-width: 410px;
+    min-width: 260px;
 }
 
 .profile__field {
@@ -41,7 +42,7 @@
 }
 
 .profile__input {
-    width: 90%;
+    width: 87%;
     background: 0;
     border: 0;
     margin: 0;
@@ -96,8 +97,39 @@
     font-weight: 500;
 }
 
+@media screen and (max-width: 769px) {
+    .profile {
+        margin: 18vh auto 10vh;
+    }
+
+    .profile__title {
+        margin: 55px auto 97px;
+    }
+
+    .profile__field:nth-child(2) {
+        margin: 0px 0 209px;
+    }
+}
+
 @media screen and (max-width: 651px) {
     .profile {
-        margin: 20vh auto 10vh;
+        margin: 0 30px 10vh;
+    }
+
+    .profile__form {
+        max-width: 260px;
+    }
+
+    .profile__title {
+        margin: 67px auto 83px;
+    }
+
+    .profile__field:nth-child(2) {
+        margin: 0 0 29vh;
+    }
+
+    .profile__button {
+        font-size: 12px;
+        line-height: 15px;
     }
 }

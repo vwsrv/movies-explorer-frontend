@@ -20,6 +20,7 @@ export default function Login({ onLogin }) {
 
   return (
     <Auth
+      name='signin'
       title="Рады видеть!"
       buttonText="Войти"
       authText="Ещё не зарегистрированы?"
@@ -28,11 +29,12 @@ export default function Login({ onLogin }) {
       isValid={isValid}
     >
       <label htmlFor="user" className="auth__field">
-        <span className="auth__input_name">E-mail</span>
+        <span className="auth__input-name">E-mail</span>
         <input
           type="text"
           className="auth__input auth__input_type-email"
           placeholder="E-mail"
+          id="email-input"
           {...register("email", {
             required: "Заполните это поле.",
             pattern: {
@@ -50,9 +52,10 @@ export default function Login({ onLogin }) {
         )}
       </label>
       <label htmlFor="password" className="auth__field">
-        <span className="auth__input_name">Пароль</span>
+        <span className="auth__input-name">Пароль</span>
         <input
           type="password"
+          id="password-input"
           className="auth__input auth__input_type-password"
           placeholder="Пароль"
           {...register("password", {

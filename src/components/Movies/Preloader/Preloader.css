@@ -17,3 +17,7 @@
     letter-spacing: 0px;
     min-width: 300px;
 }
+
+.preloader-btn:hover {
+    opacity: .7;
+}

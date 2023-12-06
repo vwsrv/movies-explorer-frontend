@@ -2,6 +2,7 @@ import authLogo from "../../images/main_logo.svg";
 import { useLocation, NavLink } from "react-router-dom";
 
 export default function Auth({
+  name,
   title,
   children,
   buttonText,
@@ -14,23 +15,16 @@ export default function Auth({
   const isRegister = location.pathname === "/signup";
 
   return (
-    <div className="auth">
+    <div className={`auth auth_form_${name}`}>
       <NavLink to="/">
-        <img src={authLogo} alt="" className="auth__logo" />
+        <img src={authLogo} alt="Логотип сайта" className="auth__logo" />
       </NavLink>
-      <h2 className="auth__title">{title}</h2>
+      <h1 className="auth__title">{title}</h1>
       <form className="auth__form auth__form_type-register" onSubmit={onSubmit}>
         {children}
         <button
           type="submit"
-          className={
-            (isValid
-              ? "auth__submit-btn"
-              : "auth__submit-btn auth__submit-btn_inactive") &&
-            isRegister
-              ? "auth__submit-btn auth__submit-btn_type-register"
-              : "auth__submit-btn auth__submit-btn_type-login"
-          }
+          className={isValid ? `auth__submit-btn auth__submit-btn_type-${name}` : `auth__submit-btn auth__submit-btn_type-${name} auth__submit-btn_inactive`}
         >
           {buttonText}
         </button>

@@ -3,9 +3,9 @@ import SearchForm from "../Movies/SearchForm/SearchForm"
 
 export default function SavedMovies() {
     return (
-    <section className="saved__movies">
+    <main className="saved-movies">
         <SearchForm />
         <MoviesCardList />
-    </section>
+    </main>
     )
 }

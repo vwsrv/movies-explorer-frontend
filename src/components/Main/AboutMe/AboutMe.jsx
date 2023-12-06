@@ -2,11 +2,11 @@ import personPhoto from "../../../images/person__photo.jpg";
 export default function AboutMe() {
   return (
     <section className="about" id="about">
-      <h2 className="section__title">Студент</h2>
+      <h2 className="about__title">Студент</h2>
       <div className="about__person">
-        <p className="person__name">Lorem Ipsum</p>
-        <p className="person__about">Фронтенд-разработчик, ipsum лет</p>
-        <p className="person__carrer">
+        <h3 className="about__person-name">Lorem Ipsum</h3>
+        <p className="about__person-about">Фронтенд-разработчик, ipsum лет</p>
+        <p className="about__person-carrer">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
           placeat suscipit corrupti excepturi illum dignissimos expedita iste
           nulla reprehenderit est ea veniam, ad rerum modi quibusdam temporibus
@@ -17,11 +17,11 @@ export default function AboutMe() {
         <img
           src={personPhoto}
           alt="Фотография разработчика"
-          className="person__photo"
+          className="about__person-photo"
         />
         <a
           href="https://github.com/vwsrv/"
-          className="person__website"
+          className="about__person-website"
           rel="noreferrer"
           target="_blank"
         >

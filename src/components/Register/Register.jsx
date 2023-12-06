@@ -17,6 +17,7 @@ export default function Register() {
   });
   return (
     <Auth
+      name='register'
       title="Добро пожаловать!"
       buttonText="Зарегистрироваться"
       authText="Уже зарегистрированы?"
@@ -24,8 +25,9 @@ export default function Register() {
       isValid={isValid}
     >
       <label htmlFor="user-name" className="auth__field">
-        <span className="auth__input_name">Имя</span>
+        <span className="auth__input-name">Имя</span>
         <input
+          id="name-input"
           type="text"
           className="auth__input auth__input_type-name"
           placeholder="Имя"
@@ -49,8 +51,9 @@ export default function Register() {
         )}
       </label>
       <label htmlFor="user" className="auth__field">
-        <span className="auth__input_name">E-mail</span>
+        <span className="auth__input-name">E-mail</span>
         <input
+          id="email-input"
           type="text"
           className="auth__input auth__input_type-email"
           placeholder="E-mail"
@@ -70,8 +73,9 @@ export default function Register() {
         )}
       </label>
       <label htmlFor="password" className="auth__field">
-        <span className="auth__input_name">Пароль</span>
+        <span className="auth__input-name">Пароль</span>
         <input
+          id="password-input"
           type="password"
           className="auth__input auth__input_type-password"
           placeholder="Пароль"
