@@ -11,6 +11,12 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+    
+}
+
+.film__link {
+    text-decoration: none;
+    color: inherit;
 }
 
 .film__image {
@@ -27,7 +33,7 @@
     grid-area: info;
     display: grid;
     row-gap: 3px;
-    grid-template-columns: max-content min-content;
+    grid-template-columns: 1fr min-content;
     justify-content: space-between;
     align-items: start;
     margin: 14px 18px auto;
