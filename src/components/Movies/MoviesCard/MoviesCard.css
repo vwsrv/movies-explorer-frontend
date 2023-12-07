@@ -127,6 +127,7 @@
     }
 
     .film__image {
+        max-width: 300px;
         height: 165px;
     }
 
