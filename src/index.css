@@ -21,4 +21,5 @@
 @import url('./components/Navigation/Navigation.css');
 @import url('./components/Auth/Auth.css');
 @import url('./components/BurgerMenu/BurgerMenu.css');
+@import url('./components/Movies/Preloader/Preloader.css');
 /* * { outline: 1px solid red; } */

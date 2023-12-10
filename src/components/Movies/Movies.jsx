@@ -1,6 +1,6 @@
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Movies({ cards, isLoading, onSearch }) {
   const [isMoviesFiltered, setMoviesFiltered] = useState(false);

@@ -46,10 +46,17 @@
     background: 0;
     border: 0;
     margin: 0;
-    padding: 0;
+    padding: 1px;
     text-align: right;
     color: white;
     outline: none;
+}
+
+.profile__input:focus {
+    transition: .3s;
+    background-color: rgb(46, 45, 45);
+    border-radius: 7px;
+    padding: 2px 0 2px;
 }
 
 .profile__input-name {
@@ -74,6 +81,7 @@
 }
 
 .profile__button {
+    transition: .3s;
     cursor: pointer;
     background: 0;
     outline: 0;
@@ -84,10 +92,23 @@
     font-size: 13px;
 }
 
+.profile__button:hover {
+    opacity: .7;
+    transition: .3s;
+}
+
 .profile__edit-btn {
     color: white;
     font-weight: 400;
     line-height: 16px;
+}
+
+.profile__edit-btn_inactive {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    color: rgb(83, 83, 83);
 }
 
 .profile__signout-btn {

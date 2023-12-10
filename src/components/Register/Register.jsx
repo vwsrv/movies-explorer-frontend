@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { emailAngular } from "../../utils/constants";
 
-export default function Register() {
+export default function Register({ onRegister }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -15,14 +15,20 @@ export default function Register() {
   } = useForm({
     mode: "all",
   });
+
+  function onSubmit() {
+    onRegister(userEmail, userPassword, userName);
+  }
+
   return (
     <Auth
-      name='register'
+      name="register"
       title="Добро пожаловать!"
       buttonText="Зарегистрироваться"
       authText="Уже зарегистрированы?"
       linkText="Войти"
       isValid={isValid}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <label htmlFor="user-name" className="auth__field">
         <span className="auth__input-name">Имя</span>
@@ -43,6 +49,7 @@ export default function Register() {
             },
           })}
           onChange={(e) => setUserName(e.target.value)}
+          value={userName}
         />
         {errors?.name && (
           <span className="auth__input-error auth__input-error_type-name">
@@ -64,6 +71,7 @@ export default function Register() {
               message: "Укажите корректный email.",
             },
           })}
+          value={userEmail}
           onChange={(e) => setUserEmail(e.target.value)}
         />
         {errors?.email && (
@@ -86,6 +94,7 @@ export default function Register() {
               message: `Минимальная длина пароля: 8. Вы ввели: ${userPassword.length}.`,
             },
           })}
+          value={userPassword}
           onChange={(e) => setUserPassword(e.target.value)}
         />
         {errors?.password && (

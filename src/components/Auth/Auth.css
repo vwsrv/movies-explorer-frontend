@@ -70,6 +70,7 @@
 
 .auth__input:focus {
     outline: 1px solid rgba(66, 133, 244, 1);
+    color: white;
 }
 
 .auth__input_color-red {

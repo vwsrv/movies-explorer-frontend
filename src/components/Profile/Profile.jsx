@@ -1,23 +1,37 @@
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { emailAngular } from "../../utils/constants";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useNavigate } from "react-router-dom";
 
-export default function Profile({ onLogout }) {
+export default function Profile({ onLogout, onUpdateUser, loggedIn }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const currentUser = useContext(CurrentUserContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
-    mode: "onBlur",
+    mode: "all",
   });
+
+  function onSubmit() {
+    onUpdateUser(userEmail, userName)
+  }
+
+  useEffect(() => {
+    setUserEmail(currentUser.email);
+    setUserName(currentUser.name);
+    reset();
+  }, [currentUser])
 
   return (
     <main className="profile">
-      <h1 className="profile__title">Привет, Виталий!</h1>
-      <form className="profile__form">
+      <h1 className="profile__title">Привет, {currentUser.name}</h1>
+      <form className="profile__form" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="user-name" className="profile__field">
           <span className="profile__input-name">Имя</span>
           <input
@@ -37,7 +51,6 @@ export default function Profile({ onLogout }) {
             })}
             value={userName || ""}
             onChange={(e) => setUserName(e.target.value)}
-            autoComplete="off"
             placeholder="Введите имя"
           />
         </label>
@@ -55,7 +68,6 @@ export default function Profile({ onLogout }) {
               },
             })}
             onChange={(e) => setUserEmail(e.target.value)}
-            autoComplete="off"
             value={userEmail || ""}
             placeholder="Введите E-mail"
           />
@@ -65,7 +77,7 @@ export default function Profile({ onLogout }) {
             {errors?.name?.message || errors?.email.message}
           </span>
         )}
-        <button className="profile__button profile__edit-btn" type="button">
+        <button className="profile__button profile__edit-btn" type="submit">
           Редактировать
         </button>
         <button

@@ -2,23 +2,26 @@ import { useState } from "react";
 
 export default function SearchForm({onFilterButtonClick, onSearch}) {
   const [movieName, setMovieName] = useState('');
-  
   function handleFilterButtonClick() {
     onFilterButtonClick();
+  }
+
+  function handleSearchMovie(e) {
+    e.preventDefault();
+    const savedSearchText = localStorage.getItem('text');
+    if (savedSearchText) {
+      onSearch(savedSearchText);
+    }
+    onSearch(movieName);
   }
 
   function handleInputChange(e) {
     setMovieName(e.target.value);
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    onSearch(movieName);
-  }
-
   return (
     <div className="search">
-      <form className="search__form" onSubmit={handleSubmit}>
+      <form className="search__form" onSubmit={handleSearchMovie}>
         <div className="search__field">
           <input
             id="movie-text"

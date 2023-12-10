@@ -11,16 +11,16 @@ export default function Login({ onLogin }) {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({
-    mode: "onBlur",
+    mode: "all",
   });
 
   function onSubmit() {
-    onLogin({ userEmail, userPassword });
+    onLogin(userEmail, userPassword);
   }
 
   return (
     <Auth
-      name='signin'
+      name="signin"
       title="Рады видеть!"
       buttonText="Войти"
       authText="Ещё не зарегистрированы?"

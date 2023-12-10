@@ -38,15 +38,17 @@ export default function MoviesCardList({ moviesCards, isLoading, isFiltered }) {
         <Preloader />
       ) : (
         <div className="movies-cards--items">
-          {getMoviesCard().map(({ id, nameRU, image, duration, trailerLink }) => (
-            <MoviesCard
-              key={id}
-              movieName={nameRU}
-              movieLink={image.url}
-              movieDuration={duration}
-              trailerLink={trailerLink}
-            />
-          ))}
+          {getMoviesCard().map(
+            ({ id, nameRU, image, duration, trailerLink }) => (
+              <MoviesCard
+                key={id}
+                movieName={nameRU}
+                movieLink={image.url}
+                movieDuration={duration}
+                trailerLink={trailerLink}
+              />
+            )
+          )}
         </div>
       )}
       {visibleMovies < moviesCards.length && (

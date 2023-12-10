@@ -1,7 +1,8 @@
 class MainApi {
-  constructor({ baseUrl, headers }) {
+  constructor({ baseUrl, headers, credentials }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
+    this._credentials = credentials;
   }
 
   _checkServerResponse(res) {
@@ -11,11 +12,33 @@ class MainApi {
     throw new Error(`Ошибка соединения ${res.status}`);
   }
 
-  regiter(name, email, password) {
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: this._headers,
+      credentials: this._credentials,
+    }).then((res) => {
+      return this._checkServerResponse(res);
+    });
+  }
+
+  updateUserInfo(email, name) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      credentials: this._credentials,
+      body: JSON.stringify({ email, name }),
+    }).then((res) => {
+      return this._checkServerResponse(res);
+    });
+  }
+
+  regiter(email, password, name) {
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({ name, email, password }),
+      credentials: this._credentials,
+      body: JSON.stringify({ email, password, name }),
     }).then((res) => {
       return this._checkServerResponse(res);
     });
@@ -25,6 +48,7 @@ class MainApi {
     return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: this._headers,
+      credentials: this._credentials,
       body: JSON.stringify({ email, password }),
     }).then((res) => {
       return this._checkServerResponse(res);
@@ -33,6 +57,9 @@ class MainApi {
 }
 
 export const userApi = new MainApi({
-  baseUrl: "https://localhost:3000",
-  headers: { "Content-Type": "application/json" },
+  baseUrl: "http://localhost:3000",
+  headers: { 
+    "Accept" : "application/json",
+    "Content-Type": "application/json" },
+  credentials: "include",
 });
