@@ -1,42 +1,73 @@
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-export default function MoviesCard({
-  movieName,
-  movieLink,
-  movieDuration,
-  trailerLink,
-}) {
-  const [isLiked, setIsLiked] = useState(false);
+export default function MoviesCard({ movie, savedMovies, onSave, onDelete }) {
+  const [isSaved, setIsSaved] = useState(false);
   const filmSaveButtonClassName = `film__like-btn ${
-    isLiked && `film__like-btn_active`
+    isSaved && `film__like-btn_active`
   }`;
+  const hours = Math.floor(movie.duration / 60);
+  const mins = Math.round(movie.duration % 60);
   const location = useLocation();
-  const isSaved = location.pathname === "/saved-movies";
-  const hours = Math.floor(movieDuration / 60);
-  const mins = Math.round(movieDuration % 60);
+  const savedMoviesPath = location.pathname === "/saved-movies";
 
-  function toggleSave() {
-    setIsLiked(!isLiked);
+  useEffect(() => {
+    const isMovieSaved = savedMovies.some(
+      (savedMovie) => savedMovie.movieId === movie.id
+    );
+    if (isMovieSaved) {
+      setIsSaved(isMovieSaved);
+    }
+  }, [movie, savedMovies]);
+
+  function findSavedMovieId(savedMovies) {
+    const foundMovie = savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
+    if (foundMovie) {
+      return foundMovie._id
+    } else {
+      return null;
+    }
+  }
+
+  function toggleMovieStatus() {
+    const foundMovie = findSavedMovieId(savedMovies);
+    if (foundMovie) {
+      return onDelete(foundMovie);
+    } 
+    onSave(movie)
   }
 
   return (
     <ul className="film">
       <li>
-        <Link to={`${trailerLink}`} target="_blank" className="film__link">
+        <Link
+          to={`${movie.trailerLink}`}
+          target="_blank"
+          className="film__link"
+        >
           <img
-            src={`https://api.nomoreparties.co${movieLink}`}
-            alt={`Постер фильма ${movieName}`}
+            src={
+              !savedMoviesPath
+                ? `https://api.nomoreparties.co${movie.image.url}`
+                : `${movie.image}`
+            }
+            alt={`Постер фильма ${movie.nameRU}`}
             className="film__image"
           />
         </Link>
       </li>
       <li className="film__info">
-        <h2 className="film__title">{movieName}</h2>
+        <h2 className="film__title">{movie.nameRU}</h2>
         <button
+          onClick={toggleMovieStatus}
           type="button"
-          className={isSaved ? "film__delete-btn" : filmSaveButtonClassName}
-          onClick={toggleSave}
+          className={
+            isSaved || !savedMoviesPath
+              ? filmSaveButtonClassName
+              : "film__delete-btn"
+          }
         ></button>
         <p className="film__duration">{`${hours} ч. ${mins} мин.`}</p>
       </li>

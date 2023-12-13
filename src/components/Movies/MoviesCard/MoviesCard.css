@@ -108,7 +108,7 @@
 
 @media screen and (max-width: 769px) {
     .film {
-        max-width: 339px;
+        max-width: 300px;
     }
 
     .film__image {
