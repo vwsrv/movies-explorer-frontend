@@ -67,6 +67,7 @@ export default function Login({ onLogin }) {
           })}
           onChange={(e) => setUserPassword(e.target.value)}
           value={userPassword}
+          autoComplete="on"
         />
         {errors?.password && (
           <span className="auth__input-error auth__input-error_type-name">
