@@ -1,11 +1,37 @@
-import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList"
-import SearchForm from "../Movies/SearchForm/SearchForm"
+import SearchForm from "../Movies/SearchForm/SearchForm";
+import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 
-export default function SavedMovies() {
-    return (
+export default function SavedMovies({
+  onFilterButtonClick,
+  onSearch,
+  movies,
+  isSearching,
+  isFiltered,
+  onLoadMore,
+  onFilter,
+  getMovie,
+  visibleMovies,
+  onSave,
+  onDelete,
+}) {
+  return (
     <main className="saved-movies">
-        <SearchForm />
-        <MoviesCardList />
+      <SearchForm
+        onFilterButtonClick={onFilterButtonClick}
+        onSearc={onSearch}
+      />
+      <MoviesCardList
+        movies={movies}
+        savedMovies={movies}
+        isSearching={isSearching}
+        isFiltered={isFiltered}
+        onLoadMore={onLoadMore}
+        onFilter={onFilter}
+        getMovie={getMovie}
+        visibleMovies={visibleMovies}
+        onSave={onSave}
+        onDelete={onDelete}
+      />
     </main>
-    )
+  );
 }
