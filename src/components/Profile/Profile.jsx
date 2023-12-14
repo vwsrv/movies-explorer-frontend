@@ -15,7 +15,7 @@ export default function Profile({ onLogout, onUpdateUser, loggedIn }) {
     reset,
     formState: { errors, isValid },
   } = useForm({
-    mode: "all",
+    mode: "onChange",
   });
 
   function onSubmit() {
@@ -77,13 +77,14 @@ export default function Profile({ onLogout, onUpdateUser, loggedIn }) {
             {errors?.name?.message || errors?.email.message}
           </span>
         )}
-        <button className="profile__button profile__edit-btn" type="submit">
+        <button className={isValid ? "profile__button profile__edit-btn" : "profile__button profile__edit-btn_inactive"} type="submit">
           Редактировать
         </button>
         <button
           type="button"
           className="profile__button profile__signout-btn"
           onClick={onLogout}
+          disabled='true'
         >
           Выйти из аккаунта
         </button>

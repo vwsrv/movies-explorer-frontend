@@ -82,7 +82,6 @@
 
 .profile__button {
     transition: .3s;
-    cursor: pointer;
     background: 0;
     outline: 0;
     border: 0;
@@ -98,16 +97,18 @@
 }
 
 .profile__edit-btn {
+    cursor: pointer;
     color: white;
     font-weight: 400;
     line-height: 16px;
 }
 
 .profile__edit-btn_inactive {
-    user-select: none;
+    pointer-events: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    user-select: none;
     color: rgb(83, 83, 83);
 }
 
