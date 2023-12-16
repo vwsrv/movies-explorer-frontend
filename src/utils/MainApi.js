@@ -5,11 +5,12 @@ class MainApi {
     this._credentials = credentials;
   }
 
-  _checkServerResponse(res) {
+  async _checkServerResponse(res) {
     if (res.ok) {
       return res.json();
     }
-    throw new Error(`Ошибка соединения ${res.status}`);
+    const errorText = await res.json()
+    throw new Error(`${errorText.message}`);
   }
 
   getUserInfo() {
@@ -51,6 +52,7 @@ class MainApi {
       credentials: this._credentials,
       body: JSON.stringify({ email, password }),
     }).then((res) => {
+      console.log(res);
       return this._checkServerResponse(res);
     });
   }
