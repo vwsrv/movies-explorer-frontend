@@ -102,7 +102,7 @@ class MainApi {
 }
 
 export const userApi = new MainApi({
-  baseUrl: "https://api.vawssrv.nomoredomainsmonster.ru",
+  baseUrl: "https://api.vavssrv.nomoredomainsmonster.ru",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
