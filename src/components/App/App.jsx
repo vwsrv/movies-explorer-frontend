@@ -84,17 +84,18 @@ export default function App() {
   }, [isLoggedIn, cardToDelete]);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (userId) {
       userApi
         .getUserInfo(userId)
         .then((userData) => {
           setCurrentUser(userData);
+          setIsLoggedIn(true);
         })
         .catch((err) => {
           console.log(err.message);
         });
     }
-  }, [isLoggedIn, userId, setCurrentUser]);
+  }, [userId, setCurrentUser, setIsLoggedIn ]);
 
   function handleRegister(email, password, name) {
     userApi

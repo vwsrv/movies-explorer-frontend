@@ -9,15 +9,15 @@ class MainApi {
     if (res.ok) {
       return res.json();
     }
-    const errorText = await res.json()
+    const errorText = await res.json();
     throw new Error(`${errorText.message}`);
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: this._headers,
       credentials: this._credentials,
+      headers: this._headers,
     }).then((res) => {
       return this._checkServerResponse(res);
     });
@@ -104,7 +104,6 @@ class MainApi {
 export const userApi = new MainApi({
   baseUrl: "https://api.vavssrv.nomoredomainsmonster.ru",
   headers: {
-    Accept: "application/json",
     "Content-Type": "application/json",
   },
   credentials: "include",

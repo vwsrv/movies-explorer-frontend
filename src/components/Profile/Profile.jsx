@@ -28,6 +28,10 @@ export default function Profile({ onLogout, onUpdateUser, connectionError }) {
     clearErrors();
   }, [currentUser, clearErrors]);
 
+  useEffect(() => {
+    checkInputValues()
+  }, [checkInputValues])
+
   function onSubmit() {
     onUpdateUser(userEmail, userName);
     if (connectionError) {
@@ -36,10 +40,6 @@ export default function Profile({ onLogout, onUpdateUser, connectionError }) {
       setserverError("");
     }
   }
-
-  useEffect(() => {
-    checkInputValues()
-  }, [userEmail, userName, onSubmit])
 
   function checkInputValues() {
     if ((userEmail === currentUser.email) && (userName === currentUser.name)) {

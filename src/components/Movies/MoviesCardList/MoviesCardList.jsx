@@ -23,16 +23,13 @@ export default function MoviesCardList({
         <Preloader />
       ) : (
         <div className="movies-cards--items">
-          {getMovie().map((movie) => (
-            <MoviesCard
-              movie={movie}
-              key={movie._id || movie.id}
-              savedMovieId={movie}
-              savedMovies={savedMovies}
-              onSave={onSave}
-              onDelete={onDelete}
-            />
-          ))}
+          {movies.length > 0 ? (
+            getMovie().map((movie) => (
+              <MoviesCard movie={movie} key={movie._id || movie.id} savedMovieId={movie} savedMovies={savedMovies} onSave={onSave} onDelete={onDelete} />
+            ))
+          ) : (
+            <p className="movies-cards--items__notfound">Здесь пока ничего нет. Введите название фильма в поисковой строке</p>
+          )}
         </div>
       )}
       {moreButtonController && (
