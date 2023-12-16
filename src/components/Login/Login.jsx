@@ -2,10 +2,12 @@ import { useState } from "react";
 import Auth from "../Auth/Auth";
 import { useForm } from "react-hook-form";
 import { emailAngular } from "../../utils/constants";
+import { useEffect } from "react";
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, connectionError }) {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -14,8 +16,26 @@ export default function Login({ onLogin }) {
     mode: "all",
   });
 
+  useEffect(() => {
+    setError(connectionError);
+  }, [connectionError]);
+
   function onSubmit() {
     onLogin(userEmail, userPassword);
+    if (connectionError) {
+      return setError(connectionError);
+    } else {
+      setError("");
+    }
+  }
+
+  function handleInputChange(e) {
+    if (e.target.name === 'email') {
+      setUserEmail(e.target.value);
+    } else if (e.target.name === 'password') {
+      setUserPassword(e.target.value);
+    }
+    setError('');
   }
 
   return (
@@ -27,6 +47,7 @@ export default function Login({ onLogin }) {
       linkText="Регистрация"
       onSubmit={handleSubmit(onSubmit)}
       isValid={isValid}
+      connectionError={error}
     >
       <label htmlFor="email-input" className="auth__field">
         <span className="auth__input-name">E-mail</span>
@@ -42,7 +63,7 @@ export default function Login({ onLogin }) {
               message: "Укажите корректный email.",
             },
           })}
-          onChange={(e) => setUserEmail(e.target.value)}
+          onChange={handleInputChange}
           value={userEmail}
         />
         {errors?.email && (
@@ -65,13 +86,13 @@ export default function Login({ onLogin }) {
               message: `Минимальная длина пароля: 8. Вы ввели: ${userPassword.length}.`,
             },
           })}
-          onChange={(e) => setUserPassword(e.target.value)}
+          onChange={handleInputChange}
           value={userPassword}
           autoComplete="on"
         />
         {errors?.password && (
           <span className="auth__input-error auth__input-error_type-name">
-            {errors?.password?.message}
+            {errors?.password?.message || errors?.validate?.message}
           </span>
         )}
       </label>

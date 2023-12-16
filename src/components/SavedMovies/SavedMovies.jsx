@@ -18,7 +18,8 @@ export default function SavedMovies({
     <main className="saved-movies">
       <SearchForm
         onFilterButtonClick={onFilterButtonClick}
-        onSearc={onSearch}
+        onSearch={onSearch}
+        isFiltered={isFiltered}
       />
       <MoviesCardList
         movies={movies}

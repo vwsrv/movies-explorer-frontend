@@ -2,22 +2,43 @@ import Auth from "../Auth/Auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { emailAngular } from "../../utils/constants";
+import { useEffect } from "react";
 
-export default function Register({ onRegister }) {
+export default function Register({ onRegister, connectionError }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isValid },
   } = useForm({
     mode: "all",
   });
 
+  useEffect(() => {
+    setError(connectionError);
+  }, [connectionError]);
+
   function onSubmit() {
     onRegister(userEmail, userPassword, userName);
+    if (connectionError) {
+      return setError(connectionError);
+    } else {
+      setError("");
+    }
+  }
+
+  function handleInputChange(e) {
+    if (e.target.name === "email") {
+      setUserEmail(e.target.value);
+    } else if (e.target.name === "password") {
+      setUserPassword(e.target.value);
+    } else if (e.target.name === "name") {
+      setUserName(e.target.value);
+    }
+    setError("");
   }
 
   return (
@@ -29,6 +50,7 @@ export default function Register({ onRegister }) {
       linkText="Войти"
       isValid={isValid}
       onSubmit={handleSubmit(onSubmit)}
+      connectionError={error}
     >
       <label htmlFor="user-name" className="auth__field">
         <span className="auth__input-name">Имя</span>
@@ -48,7 +70,7 @@ export default function Register({ onRegister }) {
               message: `Максимальная длина имени: 40. Вы ввели: ${userName.length}.`,
             },
           })}
-          onChange={(e) => setUserName(e.target.value)}
+          onChange={handleInputChange}
           value={userName}
         />
         {errors?.name && (
@@ -72,7 +94,7 @@ export default function Register({ onRegister }) {
             },
           })}
           value={userEmail}
-          onChange={(e) => setUserEmail(e.target.value)}
+          onChange={handleInputChange}
         />
         {errors?.email && (
           <span className="auth__input-error auth__input-error_type-name">
@@ -95,7 +117,7 @@ export default function Register({ onRegister }) {
             },
           })}
           value={userPassword}
-          onChange={(e) => setUserPassword(e.target.value)}
+          onChange={handleInputChange}
         />
         {errors?.password && (
           <span className="auth__input-error auth__input-error_type-name">

@@ -1,18 +1,15 @@
-import { useState } from "react";
+import useLocalStorageState from "../../../hooks/useLocalStorage";
 
-export default function SearchForm({onFilterButtonClick, onSearch}) {
-  const [movieName, setMovieName] = useState('');
+export default function SearchForm({onFilterButtonClick, onSearch, isFiltered}) {
+  const [movieName, setMovieName] = useLocalStorageState('movie-name', '');
+  
   function handleFilterButtonClick() {
     onFilterButtonClick();
   }
 
   function handleSearchMovie(e) {
     e.preventDefault();
-    const savedSearchText = localStorage.getItem('text');
-    if (savedSearchText) {
-      onSearch(savedSearchText);
-    }
-    onSearch(movieName);
+    onSearch(movieName)
   }
 
   function handleInputChange(e) {
@@ -37,11 +34,13 @@ export default function SearchForm({onFilterButtonClick, onSearch}) {
         <label htmlFor="search-type" className="search__toggle">
           <input
             type="checkbox"
+            checked={isFiltered}
             className="search__checkbox"
             id="search-type"
-            onClick={handleFilterButtonClick}
+            onChange={handleFilterButtonClick}
           />
-          <span className="search__span">Короткометражки</span>
+          <span className="search__span"></span>
+          <p className="search__span--name">Короткометражки</p>
         </label>
       </form>
     </div>

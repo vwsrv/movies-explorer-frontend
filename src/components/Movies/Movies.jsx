@@ -14,13 +14,14 @@ export default function Movies({
   isLiked,
   savedMovies,
   onSave,
-  onDelete
+  onDelete,
 }) {
   return (
     <main className="movies">
       <SearchForm
         onFilterButtonClick={onFilterButtonClick}
         onSearch={onSearch}
+        isFiltered={isFiltered}
       />
       <MoviesCardList
         isLiked={isLiked}

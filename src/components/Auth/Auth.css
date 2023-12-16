@@ -29,8 +29,24 @@
     padding: 0;
 }
 
+.auth__form-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    min-height: 63px;
+}
+
+.auth__form-container--register {
+    margin-top: 54px;
+}
+
+.auth__form-container--signin {
+    margin-top: 140px;
+}
+
 .auth__field {
-    min-height: 90px;
+    min-height: 88px;
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -77,7 +93,7 @@
     color: rgba(238, 52, 101, 1);
 }
 
-.auth__input-error {
+.auth__input-error, .auth__submit-error {
     transition: .3s;
     margin: 0;
     padding: 0;
@@ -89,9 +105,13 @@
     text-align: left;
 }
 
+.auth__submit-error {
+    padding-bottom: 4px;
+}
+
 .auth__submit-btn {
     transition: .3s;
-    margin: 0;
+    margin: 2px 0 0;
     padding: 0;
     cursor: pointer;
     border-radius: 3px;
@@ -112,20 +132,13 @@
 }
 
 .auth__submit-btn_inactive {
+    pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     background-color: rgb(83, 83, 83);
     color: rgb(223, 220, 220);
-}
-
-.auth__submit-btn_type-register {
-    margin-top: 65px;
-}
-
-.auth__submit-btn_type-signin {
-    margin-top: 155px
 }
 
 .auth__submit-btn_inactive:hover {
@@ -181,12 +194,12 @@
         
     }
 
-    .auth__submit-btn_type-signin {
-        margin-top: 244px;
+    .auth__form-container--signin {
+        margin-top: 229px;
     }
 
-    .auth__submit-btn_type-register {
-        margin-top: 155px;
+    .auth__form-container--register {
+        margin-top: 141px;
     }
 
     .auth__logo {

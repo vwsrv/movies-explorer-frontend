@@ -10,6 +10,7 @@ export default function Auth({
   linkText,
   onSubmit,
   isValid,
+  connectionError,
 }) {
   const location = useLocation();
   const isRegister = location.pathname === "/signup";
@@ -22,12 +23,17 @@ export default function Auth({
       <h1 className="auth__title">{title}</h1>
       <form className="auth__form auth__form_type-register" onSubmit={onSubmit}>
         {children}
-        <button
-          type="submit"
-          className={`auth__submit-btn auth__submit-btn_type-${name} ${isValid ? '' : 'auth__submit-btn_inactive'}`}
-        >
-          {buttonText}
-        </button>
+        <div className={`auth__form-container auth__form-container--${name}`}>
+          <span className={"auth__submit-error auth__submit-error_inactive"}>{connectionError}</span>
+          <button
+            type="submit"
+            className={`auth__submit-btn auth__submit-btn_type-${name} ${
+              isValid && !connectionError ? "" : "auth__submit-btn_inactive"
+            }`}
+          >
+            {buttonText}
+          </button>
+        </div>
         <div className="auth__signin">
           <p className="auth__text">{authText}</p>
           <NavLink

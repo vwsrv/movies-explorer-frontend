@@ -10,6 +10,12 @@
     row-gap: 37px;
 }
 
+.movies-cards--items__notfound {
+    color: white;
+    grid-column: 2;
+    margin: auto;
+}
+
 .movies-cards--btn {
     margin: 60px auto 80px;
     display: flex;

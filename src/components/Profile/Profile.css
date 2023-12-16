@@ -81,6 +81,7 @@
 }
 
 .profile__button {
+    cursor: pointer;
     transition: .3s;
     background: 0;
     outline: 0;
@@ -110,6 +111,34 @@
     -ms-user-select: none;
     user-select: none;
     color: rgb(83, 83, 83);
+}
+
+.profile__edit-btn--type_edited {
+    transition: .3s;
+    margin: 2px 0 0;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 3px;
+    min-height: 45px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
+    background: rgba(66, 133, 244, 1);
+    color: white;
+    outline: none;
+    border: none;
+}
+
+.profile__edit-btn--type_edited--inactive {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    background-color: rgb(83, 83, 83);
+    color: rgb(223, 220, 220);
 }
 
 .profile__signout-btn {

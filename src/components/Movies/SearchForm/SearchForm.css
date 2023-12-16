@@ -1,6 +1,8 @@
 .search {
     margin: 60px auto 0;
+    padding: 0 0 71px;
     color: white;
+    border-bottom: 1px solid rgba(66, 66, 66, 1);
 }
 
 .search__form {
@@ -55,10 +57,9 @@
 
 .search__toggle {
     margin: 39px 0 0;
-    padding: 0 0 71px;
+    padding: 0;
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid rgba(66, 66, 66, 1);
 }
 
 .search__checkbox {
@@ -114,6 +115,10 @@
     background-color: white;
     left: 18px;
     transition: .2s;
+}
+
+.search__span--name {
+    margin: 0;
 }
 
 @media screen and (max-width: 769px) {

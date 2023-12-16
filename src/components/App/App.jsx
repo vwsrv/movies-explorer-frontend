@@ -1,10 +1,12 @@
 import * as token from "../../utils/token";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { movies } from "../../utils/MoviesApi";
 import { ProtectedRouteElement } from "../../utils/ProtectedRoute";
 import { userApi } from "../../utils/MainApi";
+import useLocalStorageState from "../../hooks/useLocalStorage";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Header from "../Header/Header";
@@ -19,12 +21,14 @@ import { MOBILE_SCREEN_SZ } from "../../utils/screenBreakpoints";
 
 export default function App() {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  const location = useLocation();
+  const savedMoviesPath = location.pathname === "/saved-movies";
+  const [isLoggedIn, setIsLoggedIn] = useLocalStorageState("isLoggedIn", false);
+  const [currentUser, setCurrentUser] = useLocalStorageState("currentUser", {});
   const [moviesCards, setMoviesCards] = useState([]);
   const [savedMoviesCards, setSavedMoviesCards] = useState([]);
   const [isSearching, setSearching] = useState(false);
-  const [isMoviesFiltered, setMoviesFiltered] = useState(false);
+  const [isMoviesFiltered, setMoviesFiltered] = useLocalStorageState("checked", false);
   const { width } = useResize();
   const [visibleMoviesDefault, setVisibleMoviesDefault] = useState(12);
   const [visibleMoviesMobile, setVisibleMoviesMobile] = useState(5);
@@ -32,7 +36,9 @@ export default function App() {
   const visibleMovies = defaultScreenSize
     ? visibleMoviesDefault
     : visibleMoviesMobile;
-  const [deleted, setIsDeleted] = useState(false);
+  const [cardToDelete, setCardToDelete] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const searchedResults = localStorage.getItem("searched-movies");
@@ -43,33 +49,49 @@ export default function App() {
   }, [isSearching]);
 
   useEffect(() => {
-    movies
-      .getMoviesCards()
-      .then((moviesData) => {
-        localStorage.setItem("movies-list", JSON.stringify(moviesData));
-      })
-      .catch((err) => {
-        console.log(`Ошибка загрузки карточек с фильмами ${err}.`);
-      })
-      .finally(() => {
-        setSearching(false);
-      });
-  }, [isSearching]);
-
-  useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    if (userId) {
-      setIsLoggedIn(true);
-      Promise.all([userApi.getUserInfo(userId), userApi.getSavedMoviesCards()])
-        .then(([userData, savedMoviesData]) => {
-          setCurrentUser(userData);
-          setSavedMoviesCards(savedMoviesData.data);
+    if (isLoggedIn) {
+      movies
+        .getMoviesCards()
+        .then((moviesData) => {
+          localStorage.setItem("movies-list", JSON.stringify(moviesData));
         })
         .catch((err) => {
-          console.log(`Ошибка загрузки данных пользователя: ${err}.`);
+          console.log(`Ошибка загрузки карточек с фильмами ${err}.`);
+        })
+        .finally(() => {
+          setSearching(false);
         });
     }
-  }, [isLoggedIn]);
+  }, [isSearching, isLoggedIn]);
+
+  useEffect(() => {
+    if (cardToDelete) {
+      return setCardToDelete(null);
+    }
+    if (isLoggedIn) {
+      userApi
+        .getSavedMoviesCards()
+        .then((userMoviesData) => {
+          setSavedMoviesCards(userMoviesData.data);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  }, [isLoggedIn, cardToDelete]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      userApi
+        .getUserInfo(userId)
+        .then((userData) => {
+          setCurrentUser(userData);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  }, [isLoggedIn, userId, setCurrentUser]);
 
   function handleRegister(email, password, name) {
     userApi
@@ -78,7 +100,8 @@ export default function App() {
         navigate("/signin", { replace: true });
       })
       .catch((err) => {
-        console.log(`Произошла ошибка при регистрации пользователя: ${err}.`);
+        console.log(err);
+        setErrorMessage(err.message);
       });
   }
 
@@ -87,16 +110,19 @@ export default function App() {
       .login(email, password)
       .then((res) => {
         token.setToken(res._id);
+        localStorage.setItem("isLoggedIn", true);
         setIsLoggedIn(true);
         navigate("/movies", { replace: true });
       })
       .catch((err) => {
-        console.log(`Ошибка при выполнении входа: ${err}.`);
+        console.log(err.message);
+        setErrorMessage(err.message);
       });
   }
 
   function handleLogout() {
     token.removeToken();
+    localStorage.clear();
     navigate("/signin", { replace: true });
   }
 
@@ -107,9 +133,8 @@ export default function App() {
         setCurrentUser(updatedUserData);
       })
       .catch((err) => {
-        console.log(
-          `Возникла ошибка при обновалении данных пользователя: ${err}`
-        );
+        console.log(err.message);
+        setErrorMessage(err.message);
       });
   }
 
@@ -132,7 +157,7 @@ export default function App() {
         setSavedMoviesCards([movieCard, ...savedMoviesCards]);
       })
       .catch((err) => {
-        console.log(`Возникла ошибка при добавлении карточки: ${err}`);
+        console.log(`${err.message}.`);
       });
   }
 
@@ -140,12 +165,14 @@ export default function App() {
     userApi
       .deleteMovie(movie._id || movie)
       .then((movieCard) => {
-        const updatedMovies = savedMoviesCards.filter((card) => card._id !== movieCard._id);
+        const updatedMovies = savedMoviesCards.filter(
+          (card) => card._id !== movieCard.id
+        );
+        setCardToDelete(movieCard);
         setSavedMoviesCards(updatedMovies);
-        setIsDeleted(true);
       })
       .catch((err) => {
-        console.log(`Возникла ошибка при удалении фильма из избранного: ${err}`);
+        console.log(`${err.message}.`);
       });
   }
 
@@ -169,10 +196,13 @@ export default function App() {
     if (isFiltered) {
       filteredMovies = handleFilterMovies(filteredMovies);
     }
+    if (savedMoviesPath) {
+      return filteredMovies;
+    }
     return filteredMovies.slice(0, visibleMovies);
   }
 
-  function getMoviesCard() {
+  function getMoviesCards() {
     return filterAndLimitMovies(moviesCards, isMoviesFiltered);
   }
 
@@ -195,16 +225,16 @@ export default function App() {
                 onSearch={handleSearchMovie}
                 onLoadMore={handleLoadMore}
                 onFilter={handleFilterMovies}
-                getMovie={getMoviesCard}
+                getMovie={getMoviesCards}
                 onFilterButtonClick={toggleButtonClick}
-                loggedIn={true}
+                onSave={handleSaveMovie}
+                onDelete={handleDeleteMovie}
+                loggedIn={isLoggedIn}
                 movies={moviesCards}
                 isSearching={isSearching}
                 visibleMovies={visibleMovies}
                 isFiltered={isMoviesFiltered}
                 savedMovies={savedMoviesCards}
-                onSave={handleSaveMovie}
-                onDelete={handleDeleteMovie}
               />
             }
           />
@@ -220,7 +250,7 @@ export default function App() {
                 onFilter={handleFilterMovies}
                 getMovie={getSavedMoviesCard}
                 onFilterButtonClick={toggleButtonClick}
-                loggedIn={true}
+                loggedIn={isLoggedIn}
                 movies={savedMoviesCards}
                 isSearching={isSearching}
                 visibleMovies={visibleMovies}
@@ -236,13 +266,25 @@ export default function App() {
                 onLogout={handleLogout}
                 loggedIn={isLoggedIn}
                 onUpdateUser={handleUpdateUserInfo}
+                connectionError={errorMessage}
               />
             }
           />
-          <Route path="signin" element={<Login onLogin={handleLogin} />} />
+          <Route
+            path="signin"
+            element={
+              <Login onLogin={handleLogin} connectionError={errorMessage} />
+            }
+          />
           <Route
             path="signup"
-            element={<Register onRegister={handleRegister} />}
+            element={
+              <Register
+                onRegister={handleRegister}
+                loggedIn={isLoggedIn}
+                connectionError={errorMessage}
+              />
+            }
           />
         </Routes>
         <Footer />

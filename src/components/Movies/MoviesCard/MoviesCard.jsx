@@ -19,13 +19,17 @@ export default function MoviesCard({ movie, savedMovies, onSave, onDelete }) {
     );
     if (isMovieSaved) {
       setIsSaved(isMovieSaved);
+    } else {
+      setIsSaved(false)
     }
   }, [movie, savedMovies]);
 
   function findSavedMovieId(savedMovies) {
-    const foundMovie = savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
+    const foundMovie = savedMovies.find(
+      (savedMovie) => savedMovie.movieId === movie.id
+    );
     if (foundMovie) {
-      return foundMovie._id
+      return foundMovie._id;
     } else {
       return null;
     }
@@ -35,8 +39,8 @@ export default function MoviesCard({ movie, savedMovies, onSave, onDelete }) {
     const foundMovie = findSavedMovieId(savedMovies);
     if (foundMovie) {
       return onDelete(foundMovie);
-    } 
-    onSave(movie)
+    }
+    onSave(movie);
   }
 
   return (
