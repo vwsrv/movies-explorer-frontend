@@ -4,7 +4,7 @@ function isDefined(storedValue) {
     return storedValue !== null && storedValue !== 'undefined';
 }
 
-export default function useLocalSotageState(key, initialValue) {
+export default function useLocalStorageState(key, initialValue) {
     const [state, setState] = useState(() => {
         const storedValue = localStorage.getItem(key);
 

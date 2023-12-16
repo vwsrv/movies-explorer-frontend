@@ -102,7 +102,7 @@ class MainApi {
 }
 
 export const userApi = new MainApi({
-  baseUrl: "http://localhost:3000",
+  baseUrl: "https://api.vawssrv.nomoredomainsmonster.ru/",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
