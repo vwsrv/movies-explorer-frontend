@@ -28,7 +28,10 @@ export default function App() {
   const [moviesCards, setMoviesCards] = useState([]);
   const [savedMoviesCards, setSavedMoviesCards] = useState([]);
   const [isSearching, setSearching] = useState(false);
-  const [isMoviesFiltered, setMoviesFiltered] = useLocalStorageState("checked", false);
+  const [isMoviesFiltered, setMoviesFiltered] = useLocalStorageState(
+    "checked",
+    false
+  );
   const { width } = useResize();
   const [visibleMoviesDefault, setVisibleMoviesDefault] = useState(12);
   const [visibleMoviesMobile, setVisibleMoviesMobile] = useState(5);
@@ -138,16 +141,29 @@ export default function App() {
       });
   }
 
-  function handleSearchMovie(text) {
-    setSearching(true);
-    const savedMovies = JSON.parse(localStorage.getItem("movies-list"));
-    const searchedMovies = savedMovies.filter((movie) => {
-      const nameRU = movie.nameRU.toLowerCase();
-      const nameEN = movie.nameEN.toLowerCase();
+  function searchMoviesInArray(arr, text) {
+    const searched = arr.filter((item) => {
+      const nameRU = item.nameRU.toLowerCase();
+      const nameEN = item.nameEN.toLowerCase();
       const searchText = text.toLowerCase();
       return nameRU.includes(searchText) || nameEN.includes(searchText);
     });
-    localStorage.setItem("searched-movies", JSON.stringify(searchedMovies));
+    return searched;
+  }
+
+  function handleSearchMovie(text) {
+    setSearching(true);
+    const savedMovies = JSON.parse(localStorage.getItem("movies-list"));
+    const moviesListResult = searchMoviesInArray(savedMovies, text);
+    const savedMoviesResult = searchMoviesInArray(savedMoviesCards, text);
+    if (savedMoviesPath) {
+      return setSavedMoviesCards(savedMoviesResult);
+    } else {
+      return localStorage.setItem(
+        "searched-movies",
+        JSON.stringify(moviesListResult)
+      );
+    }
   }
 
   function handleSaveMovie(movieCard) {
