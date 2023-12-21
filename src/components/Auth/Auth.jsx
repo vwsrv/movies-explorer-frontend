@@ -9,7 +9,7 @@ export default function Auth({
   authText,
   linkText,
   onSubmit,
-  isValid,
+  isFormValid,
   connectionError,
 }) {
   const location = useLocation();
@@ -28,7 +28,7 @@ export default function Auth({
           <button
             type="submit"
             className={`auth__submit-btn auth__submit-btn_type-${name} ${
-              isValid && !connectionError ? "" : "auth__submit-btn_inactive"
+              isFormValid && !connectionError ? "" : "auth__submit-btn_inactive"
             }`}
           >
             {buttonText}
