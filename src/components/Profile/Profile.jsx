@@ -1,68 +1,71 @@
 import { useForm } from "react-hook-form";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { emailAngular } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-export default function Profile({ onLogout, onUpdateUser, connectionError }) {
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [serverError, setserverError] = useState("");
+export default function Profile({
+  onLogout,
+  onUpdateUser,
+  connectionError,
+  successMessage,
+}) {
+  const [connectionInfo, setConnectionInfo] = useState("");
   const [isChanged, setIsChanged] = useState(false);
   const currentUser = useContext(CurrentUserContext);
   const {
     register,
     handleSubmit,
-    clearErrors,
+    watch,
     formState: { errors, isValid },
   } = useForm({
-    mode: "onBlur",
+    mode: "onChange",
+    defaultValues: {
+      name: currentUser.name,
+      email: currentUser.email,
+    },
   });
+  const userName = watch("name");
+  const userEmail = watch("email");
 
-  useEffect(() => {
-    setserverError(connectionError);
-  }, [connectionError]);
-
-  useEffect(() => {
-    setUserEmail(currentUser.email);
-    setUserName(currentUser.name);
-    clearErrors();
-  }, [currentUser, clearErrors]);
-
-  useEffect(() => {
-    checkInputValues()
-  }, [checkInputValues])
-
-  function onSubmit() {
-    onUpdateUser(userEmail, userName);
-    if (connectionError) {
-      return setserverError(connectionError);
-    } else {
-      setserverError("");
-    }
-  }
-
-  function checkInputValues() {
-    if ((userEmail === currentUser.email) && (userName === currentUser.name)) {
+  const checkInputValues = useCallback(() => {
+    if (userEmail === currentUser.email && userName === currentUser.name) {
       setIsChanged(false);
     }
-  }
+  }, [userEmail, userName, currentUser.email, currentUser.name]);
 
-  function handleInputChange(e) {
-    if (e.target.name === "email") {
-      setIsChanged(true);
-      setUserEmail(e.target.value);
-    } else if (e.target.name === "name") {
-      setIsChanged(true);
-      setUserName(e.target.value);
+  useEffect(() => {
+    if (connectionError) {
+      setConnectionInfo("");
     }
-    setserverError("");
+    setIsChanged(true);
+  }, [userName, userEmail, connectionError]);
+
+  useEffect(() => {
+    checkInputValues();
+  }, [checkInputValues]);
+
+  useEffect(() => {
+    if (successMessage) {
+      return setConnectionInfo(successMessage);
+    } else {
+      return setConnectionInfo(connectionError);
+    }
+  }, [connectionError, successMessage]);
+
+  function onSubmit(data) {
+    onUpdateUser(data.email, data.name);
+    return setConnectionInfo(connectionError);
   }
 
-  const submitButtonClassName = isValid && !serverError
-    ? isChanged
-      ? "profile__edit-btn profile__edit-btn--type_edited"
-      : "profile__button profile__edit-btn_inactive"
-    : "profile__button profile__edit-btn--type_edited profile__edit-btn--type_edited--inactive";
+  const submitButtonClassName = `profile__button profile__edit-btn ${
+    isValid
+      ? isChanged
+        ? "profile__edit-btn--type_edited"
+        : "profile__edit-btn--inactive"
+      : connectionError
+      ? "profile__edit-btn--type_edited profile__edit-btn--type_edited--inactive"
+      : "profile__edit-btn--type_edited profile__edit-btn--type_edited--inactive"
+  }`;
 
   return (
     <main className="profile">
@@ -78,15 +81,13 @@ export default function Profile({ onLogout, onUpdateUser, connectionError }) {
               required: "Заполните все поля.",
               minLength: {
                 value: 2,
-                message: `Минимальная длина имени: 2. Вы ввели: ${userName.length}.`,
+                message: `Минимальная длина имени: 2 симв.`,
               },
               maxLength: {
                 value: 40,
-                message: `Максимальная длина имени: 40. Вы ввели: ${userName.length}.`,
+                message: `Максимальная длина имени: 40 симв.`,
               },
             })}
-            value={userName || ""}
-            onChange={handleInputChange}
             placeholder="Введите имя"
           />
         </label>
@@ -103,30 +104,40 @@ export default function Profile({ onLogout, onUpdateUser, connectionError }) {
                 message: "Укажите корректный email.",
               },
             })}
-            onChange={handleInputChange}
-            value={userEmail}
             placeholder="Введите E-mail"
           />
         </label>
-        {errors?.email || errors?.name ? (
-          <span className="profile__input-error">
-            {errors?.name?.message || errors?.email.message}
-          </span>
-        ) : (
-          serverError && <span className="profile__input-error">{serverError}</span>
-        )}
-        <button className={submitButtonClassName} type="submit">
-          {!isChanged ? `Редактировать` : "Сохранить"}
-        </button>
-        {!isChanged && (
-          <button
-            type="button"
-            className="profile__button profile__signout-btn"
-            onClick={onLogout}
-          >
-            Выйти из аккаунта
+        <div className="profile__submit-container">
+          {errors?.email || errors?.name ? (
+            <span className="profile__submit-error">
+              {errors?.name?.message || errors?.email.message}
+            </span>
+          ) : (
+            connectionInfo && (
+              <span
+                className={
+                  !successMessage
+                    ? "profile__submit-error"
+                    : "profile__submit-error profile__submit-success"
+                }
+              >
+                {connectionInfo}
+              </span>
+            )
+          )}
+          <button className={submitButtonClassName} type="submit">
+            {!isChanged ? `Редактировать` : "Сохранить"}
           </button>
-        )}
+          {!isChanged && isValid && (
+            <button
+              type="button"
+              className="profile__button profile__signout-btn"
+              onClick={onLogout}
+            >
+              Выйти из аккаунта
+            </button>
+          )}
+        </div>
       </form>
     </main>
   );
