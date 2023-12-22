@@ -34,7 +34,7 @@ class MainApi {
     });
   }
 
-  regiter(email, password, name) {
+  register(email, password, name) {
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: this._headers,
@@ -52,7 +52,6 @@ class MainApi {
       credentials: this._credentials,
       body: JSON.stringify({ email, password }),
     }).then((res) => {
-      console.log(res);
       return this._checkServerResponse(res);
     });
   }
@@ -102,7 +101,7 @@ class MainApi {
 }
 
 export const userApi = new MainApi({
-  baseUrl: "https://api.vavssrv.nomoredomainsmonster.ru",
+  baseUrl: "https://api.vavssrv.nomoredomainsmonster.ru'",
   headers: {
     "Content-Type": "application/json",
   },

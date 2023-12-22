@@ -7,12 +7,9 @@ import ValidationInput from "../ValidationInput/ValidationInput";
 
 export default function Login({ onLogin, connectionError, successMessage }) {
   const [connectionInfo, setConnectionInfo] = useState("");
-  const { ...methods } = useForm({
+  const methods = useForm({
     mode: "onChange",
-    defaultValues: {
-      name: "",
-      password: "",
-    },
+    defaultValues: { name: "", password: "" },
   });
   const userEmail = methods.watch("email");
   const userPassword = methods.watch("password");

@@ -12,12 +12,9 @@ export default function Register({
 }) {
   const [connectionInfo, setConnectionInfo] = useState("");
 
-  const { ...methods } = useForm({
+  const methods = useForm({
     mode: "onChange",
-    defaultValues: {
-      name: "",
-      password: "",
-    },
+    defaultValues: { name: "", password: "" },
   });
 
   const userName = methods.watch("name");
@@ -25,9 +22,7 @@ export default function Register({
   const userPassword = methods.watch("password");
 
   useEffect(() => {
-    if (userName || userEmail || userPassword) {
-      setConnectionInfo("");
-    }
+    setConnectionInfo("");
   }, [userName, userEmail, userPassword]);
 
   function onSubmit(data) {
