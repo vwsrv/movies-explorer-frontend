@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import useStorage from '../../../hooks/useLocalStorage';
+import useStorage from "../../../hooks/useLocalStorage";
 
 export default function SearchForm({
   isFiltered,
   onFilterButton,
   onSearch,
-  savedMoviesPath
+  savedMoviesPath,
 }) {
-  const [moviesSearchQuery, setMoviesSearchQuery] = useStorage('movies-search-query', '');
-  const [savedMoviesSearchQuery, setSavedMoviesQuery] = useState('');
-  
+  const [moviesSearchQuery, setMoviesSearchQuery] = useStorage(
+    "movies-search-query",
+    ""
+  );
+  const [savedMoviesSearchQuery, setSavedMoviesQuery] = useState("");
+
   function handleInputChande(e) {
     const inputValue = e.target.value;
     if (savedMoviesPath) {
@@ -24,15 +27,19 @@ export default function SearchForm({
     onSearch(savedMoviesPath ? savedMoviesSearchQuery : moviesSearchQuery);
   }
 
-useEffect(() => {
+  useEffect(() => {
     if (savedMoviesPath) {
       setMoviesSearchQuery(moviesSearchQuery);
     } else {
       setSavedMoviesQuery(savedMoviesSearchQuery);
     }
-  }, [savedMoviesPath, setMoviesSearchQuery, setSavedMoviesQuery, moviesSearchQuery, savedMoviesSearchQuery]);
-
-
+  }, [
+    savedMoviesPath,
+    setMoviesSearchQuery,
+    setSavedMoviesQuery,
+    moviesSearchQuery,
+    savedMoviesSearchQuery,
+  ]);
 
   return (
     <div className="search">

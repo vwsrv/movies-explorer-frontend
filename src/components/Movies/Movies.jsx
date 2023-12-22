@@ -2,39 +2,38 @@ import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
 export default function Movies({
+  isLoading,
   movies,
-  isSearching,
-  onSearch,
-  onFilterButtonClick,
-  isFiltered,
-  onLoadMore,
-  onFilterClick,
-  getMovie,
-  visibleMovies,
-  isLiked,
   savedMovies,
+  setFiltered,
+  isFiltered,
+  onSearch,
   onSave,
   onDelete,
+  savedMoviesPath,
+  errorMessage,
 }) {
+  function toggleFilterMovies() {
+    setFiltered(document.getElementById("search-type").checked);
+  }
+
   return (
     <main className="movies">
       <SearchForm
-        onFilterButtonClick={onFilterButtonClick}
-        onSearch={onSearch}
+        onFilterButton={toggleFilterMovies}
         isFiltered={isFiltered}
+        onSearch={onSearch}
+        savedMoviesPath={savedMoviesPath}
       />
       <MoviesCardList
-        isLiked={isLiked}
+        isLoading={isLoading}
         movies={movies}
-        isSearching={isSearching}
-        isFiltered={isFiltered}
-        onLoadMore={onLoadMore}
-        onFilter={onFilterClick}
-        getMovie={getMovie}
-        visibleMovies={visibleMovies}
         savedMovies={savedMovies}
+        isFiltered={isFiltered}
         onSave={onSave}
         onDelete={onDelete}
+        savedMoviesPath={savedMoviesPath}
+        errorMessage={errorMessage}
       />
     </main>
   );
