@@ -21,7 +21,6 @@
     position: fixed;
     top: 50px;
     right: 20px;
-    /* Используйте right для правильного выравнивания справа */
     transform-origin: right center;
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
     background-color: rgb(229, 228, 228);
@@ -50,29 +49,10 @@
     width: 90vw;
 }
 
-.popup__close-btn {
-    background-image: url("../../images/close__icon.svg");
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    position: absolute;
-    right: 407px;
-    top: -23px;
-    background-size: 20px;
-}
-
-.popup__close-btn:hover {
-    opacity: .7;
-}
-
 .popup__image {
     margin: 0;
     padding: 0;
-    max-width: 100px;
+    max-width: 50px;
 }
 
 .popup__title {
@@ -94,15 +74,6 @@
         top: 16px;
         max-width: 288px;
         height: 100px
-    }
-
-    .popup__close-btn {
-        background-image: url('../../images/close-btn_type-black.svg');
-        background-size: 20px;
-        right: 10px;
-        width: 20px;
-        height: 20px;
-        top: 10px;
     }
 
     .popup__title {
