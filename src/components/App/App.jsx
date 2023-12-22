@@ -1,111 +1,59 @@
 import * as token from "../../utils/token";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { movies } from "../../utils/MoviesApi";
 import { ProtectedRouteElement } from "../../utils/ProtectedRoute";
 import { userApi } from "../../utils/MainApi";
-import useLocalStorageState from "../../hooks/useLocalStorage";
+import { movies } from "../../utils/MoviesApi";
+import useStorage from "../../hooks/useLocalStorage";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import Movies from "../Movies/Movies";
-import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import useResize from "../../hooks/useResize";
-import { MOBILE_SCREEN_SZ } from "../../utils/screenBreakpoints";
+import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 
 export default function App() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const savedMoviesPath = location.pathname === "/saved-movies";
-  const [isLoggedIn, setIsLoggedIn] = useLocalStorageState("isLoggedIn", false);
-  const [currentUser, setCurrentUser] = useLocalStorageState("currentUser", {});
+  const [loggedIn, setLoggedIn] = useStorage("isLoggedIn", false);
+  const [currentUser, setCurrentUser] = useStorage("currentUser", {});
   const [moviesCards, setMoviesCards] = useState([]);
+  const [searchedMoviesCards, setSearchedMoviesCards] = useStorage("movies-cards", []);
   const [savedMoviesCards, setSavedMoviesCards] = useState([]);
-  const [isSearching, setSearching] = useState(false);
-  const [isMoviesFiltered, setMoviesFiltered] = useLocalStorageState(
-    "checked",
+  const [searchedSavedMovies, setSearchedSavedMovies] = useState([]);
+  const [isMoviesFiltered, setMoviesFiltered] = useStorage(
+    "movies-checked",
     false
   );
-  const { width } = useResize();
-  const [visibleMoviesDefault, setVisibleMoviesDefault] = useState(12);
-  const [visibleMoviesMobile, setVisibleMoviesMobile] = useState(5);
-  const defaultScreenSize = width >= MOBILE_SCREEN_SZ;
-  const visibleMovies = defaultScreenSize
-    ? visibleMoviesDefault
-    : visibleMoviesMobile;
-  const [cardToDelete, setCardToDelete] = useState([]);
+  const [isSavedMoviesFiltered, setSavedMoviesFiltered] = useStorage(
+    "saved-movies-checked",
+    false
+  );
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const userId = localStorage.getItem("userId");
-
-  useEffect(() => {
-    const searchedResults = localStorage.getItem("searched-movies");
-    if (searchedResults) {
-      const searchedMoviesList = JSON.parse(searchedResults);
-      setMoviesCards(searchedMoviesList);
-    }
-  }, [isSearching]);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      movies
-        .getMoviesCards()
-        .then((moviesData) => {
-          localStorage.setItem("movies-list", JSON.stringify(moviesData));
-        })
-        .catch((err) => {
-          console.log(`Ошибка загрузки карточек с фильмами ${err}.`);
-        })
-        .finally(() => {
-          setSearching(false);
-        });
-    }
-  }, [isSearching, isLoggedIn]);
-
-  useEffect(() => {
-    if (cardToDelete) {
-      return setCardToDelete(null);
-    }
-    if (isLoggedIn) {
-      userApi
-        .getSavedMoviesCards()
-        .then((userMoviesData) => {
-          setSavedMoviesCards(userMoviesData.data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-  }, [isLoggedIn, cardToDelete]);
-
-  useEffect(() => {
-    if (userId) {
-      userApi
-        .getUserInfo(userId)
-        .then((userData) => {
-          setCurrentUser(userData);
-          setIsLoggedIn(true);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-  }, [userId, setCurrentUser, setIsLoggedIn ]);
+  const location = useLocation();
+  const savedMoviesPath = location.pathname === "/saved-movies";
 
   function handleRegister(email, password, name) {
     userApi
-      .regiter(email, password, name)
+      .register(email, password, name)
       .then(() => {
-        navigate("/signin", { replace: true });
+          handleLogin(email, password);
       })
       .catch((err) => {
-        console.log(err);
         setErrorMessage(err.message);
+        console.log(err);
       });
   }
 
@@ -114,9 +62,10 @@ export default function App() {
       .login(email, password)
       .then((res) => {
         token.setToken(res._id);
-        localStorage.setItem("isLoggedIn", true);
-        setIsLoggedIn(true);
+        setLoggedIn(true);
+        setSuccessMessage("Добро пожаловать!");
         navigate("/movies", { replace: true });
+        localStorage.setItem("isLoggedIn", true);
       })
       .catch((err) => {
         console.log(err.message);
@@ -126,8 +75,9 @@ export default function App() {
 
   function handleLogout() {
     token.removeToken();
+    setLoggedIn(false);
     localStorage.clear();
-    navigate("/signin", { replace: true });
+    navigate("/", { replace: true });
   }
 
   function handleUpdateUserInfo(email, name) {
@@ -135,6 +85,8 @@ export default function App() {
       .updateUserInfo(email, name)
       .then((updatedUserData) => {
         setCurrentUser(updatedUserData);
+        setErrorMessage("");
+        setSuccessMessage("Данные успешно обновлены!");
       })
       .catch((err) => {
         console.log(err.message);
@@ -142,116 +94,145 @@ export default function App() {
       });
   }
 
-  function searchMoviesInArray(arr, text) {
-    const searched = arr.filter((item) => {
-      const nameRU = item.nameRU.toLowerCase();
-      const nameEN = item.nameEN.toLowerCase();
-      const searchText = text.toLowerCase();
-      return nameRU.includes(searchText) || nameEN.includes(searchText);
-    });
-    return searched;
-  }
-
-  function handleSearchMovie(text) {
-    setSearching(true);
-    const savedMovies = JSON.parse(localStorage.getItem("movies-list"));
-    const moviesListResult = searchMoviesInArray(savedMovies, text);
-    const savedMoviesResult = searchMoviesInArray(savedMoviesCards, text);
-    if (savedMoviesPath) {
-      return setSavedMoviesCards(savedMoviesResult);
-    } else {
-      return localStorage.setItem(
-        "searched-movies",
-        JSON.stringify(moviesListResult)
-      );
+  useEffect(() => {
+    if (successMessage) {
+      setErrorMessage("");
+      const timeout = setTimeout(() => {
+        setSuccessMessage("");
+      }, 1500);
+      return () => clearTimeout(timeout);
     }
-  }
+  }, [successMessage]);
 
-  function handleSaveMovie(movieCard) {
+  useEffect(() => {
+    if (loggedIn) {
+      userApi
+        .getUserInfo(userId)
+        .then((userData) => {
+          setCurrentUser(userData);
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  }, [userId, setCurrentUser, setLoggedIn, loggedIn]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    if (loggedIn) {
+      movies
+        .getMoviesCards()
+        .then((moviesCards) => {
+          setMoviesCards(moviesCards);
+        })
+        .catch((err) => {
+          console.log(err.message);
+          setErrorMessage("Произошла ошибка на стороне сервера Beats-Film.");
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [loggedIn, setMoviesCards]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      userApi
+        .getSavedMoviesCards({owner: userId})
+        .then((userMoviesData) => {
+          setSavedMoviesCards(userMoviesData.data);
+          setSearchedSavedMovies(userMoviesData.data)
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  }, [loggedIn, userId]);
+
+  function handleSaveMovieCard(movieCard) {
     userApi
       .saveMovie(movieCard)
       .then((movieCard) => {
         setSavedMoviesCards([movieCard, ...savedMoviesCards]);
+        setSearchedSavedMovies([movieCard, ...searchedSavedMovies])
       })
       .catch((err) => {
-        console.log(`${err.message}.`);
+        console.log(err.message);
       });
   }
 
-  function handleDeleteMovie(movie) {
+  function handleDeleteMovieCard(movie) {
     userApi
-      .deleteMovie(movie._id || movie)
-      .then((movieCard) => {
-        const updatedMovies = savedMoviesCards.filter(
-          (card) => card._id !== movieCard.id
+      .deleteMovie(movie)
+      .then(() => {
+        setSavedMoviesCards((moviesData) =>
+          moviesData.filter((card) => card._id !== (movie._id || movie))
         );
-        setCardToDelete(movieCard);
-        setSavedMoviesCards(updatedMovies);
+        setSearchedSavedMovies((moviesData) =>
+          moviesData.filter((card) => card._id !== (movie._id || movie))
+        );
       })
       .catch((err) => {
         console.log(`${err.message}.`);
       });
   }
 
-  function toggleButtonClick() {
-    setMoviesFiltered(document.getElementById("search-type").checked);
+  function searchMovieInList(arr, query) {
+    const lowerCaseQuery = query.toLowerCase();
+    return arr.filter((item) => {
+      const nameRU = item.nameRU.toLowerCase();
+      const nameEN = item.nameEN.toLowerCase();
+      return nameRU.includes(lowerCaseQuery) || nameEN.includes(lowerCaseQuery);
+    });
   }
 
-  function handleLoadMore() {
-    if (defaultScreenSize) {
-      setVisibleMoviesDefault(visibleMoviesDefault + 3);
-    }
-    return setVisibleMoviesMobile(visibleMoviesMobile + 2);
-  }
-
-  function handleFilterMovies(movies) {
-    return movies.filter((movie) => movie.duration <= 60);
-  }
-
-  function filterAndLimitMovies(movies, isFiltered) {
-    let filteredMovies = movies;
-    if (isFiltered) {
-      filteredMovies = handleFilterMovies(filteredMovies);
-    }
+  function handleSearchMovie(query) {
     if (savedMoviesPath) {
-      return filteredMovies;
+      const searchedSavedMovies = searchMovieInList(savedMoviesCards, query);
+      setSearchedSavedMovies(searchedSavedMovies);
+    } else {
+      const searchedMovies = searchMovieInList(moviesCards, query);
+      setSearchedMoviesCards(searchedMovies);
     }
-    return filteredMovies.slice(0, visibleMovies);
-  }
-
-  function getMoviesCards() {
-    return filterAndLimitMovies(moviesCards, isMoviesFiltered);
-  }
-
-  function getSavedMoviesCard() {
-    return filterAndLimitMovies(savedMoviesCards, isMoviesFiltered);
   }
 
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header loggedIn={isLoggedIn} />
+        <Header loggedIn={loggedIn} />
         <Routes>
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/" element={<Main />} />
+          <Route
+            path="profile"
+            element={
+              <ProtectedRouteElement
+                element={Profile}
+                onLogout={handleLogout}
+                loggedIn={loggedIn}
+                onUpdateUser={handleUpdateUserInfo}
+                connectionError={errorMessage}
+                successMessage={successMessage}
+              />
+            }
+          />
           <Route
             path="movies"
             element={
               <ProtectedRouteElement
                 element={Movies}
                 onSearch={handleSearchMovie}
-                onLoadMore={handleLoadMore}
-                onFilter={handleFilterMovies}
-                getMovie={getMoviesCards}
-                onFilterButtonClick={toggleButtonClick}
-                onSave={handleSaveMovie}
-                onDelete={handleDeleteMovie}
-                loggedIn={isLoggedIn}
-                movies={moviesCards}
-                isSearching={isSearching}
-                visibleMovies={visibleMovies}
-                isFiltered={isMoviesFiltered}
+                onSave={handleSaveMovieCard}
+                onDelete={handleDeleteMovieCard}
+                loggedIn={loggedIn}
+                isLoading={isLoading}
+                movies={searchedMoviesCards}
                 savedMovies={savedMoviesCards}
+                isFiltered={isMoviesFiltered}
+                setFiltered={setMoviesFiltered}
+                savedMoviesPath={savedMoviesPath}
+                errorMessage={errorMessage}
               />
             }
           />
@@ -260,30 +241,16 @@ export default function App() {
             element={
               <ProtectedRouteElement
                 element={SavedMovies}
-                onSave={handleDeleteMovie}
-                onDelete={handleDeleteMovie}
                 onSearch={handleSearchMovie}
-                onLoadMore={handleLoadMore}
-                onFilter={handleFilterMovies}
-                getMovie={getSavedMoviesCard}
-                onFilterButtonClick={toggleButtonClick}
-                loggedIn={isLoggedIn}
-                movies={savedMoviesCards}
-                isSearching={isSearching}
-                visibleMovies={visibleMovies}
-                isFiltered={isMoviesFiltered}
-              />
-            }
-          />
-          <Route
-            path="profile"
-            element={
-              <ProtectedRouteElement
-                element={Profile}
-                onLogout={handleLogout}
-                loggedIn={isLoggedIn}
-                onUpdateUser={handleUpdateUserInfo}
-                connectionError={errorMessage}
+                onSave={handleSaveMovieCard}
+                onDelete={handleDeleteMovieCard}
+                loggedIn={loggedIn}
+                isLoading={isLoading}
+                movies={searchedSavedMovies}
+                savedMovies={savedMoviesCards}
+                savedMoviesPath={savedMoviesPath}
+                isFiltered={isSavedMoviesFiltered}
+                setFiltered={setSavedMoviesFiltered}
               />
             }
           />
@@ -296,11 +263,16 @@ export default function App() {
           <Route
             path="signup"
             element={
-              <Register
-                onRegister={handleRegister}
-                loggedIn={isLoggedIn}
-                connectionError={errorMessage}
-              />
+              loggedIn ? (
+                <Navigate to="/movies" replace />
+              ) : (
+                <Register
+                  onRegister={handleRegister}
+                  loggedIn={loggedIn}
+                  connectionError={errorMessage}
+                  successMessage={successMessage}
+                />
+              )
             }
           />
         </Routes>
