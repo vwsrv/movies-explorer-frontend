@@ -15,12 +15,14 @@ export default function SavedMovies({
   function toggleFilterSavedMovies() {
     setFiltered(document.getElementById("search-type").checked);
   }
+
   return (
     <main className="saved-movies">
       <SearchForm
         isFiltered={isFiltered}
         onSearch={onSearch}
         onFilterButton={toggleFilterSavedMovies}
+        savedMoviesPath={savedMoviesPath}
       />
       <MoviesCardList
         isLoading={isLoading}
