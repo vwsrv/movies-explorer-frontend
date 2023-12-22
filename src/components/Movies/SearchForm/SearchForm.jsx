@@ -8,7 +8,7 @@ export default function SearchForm({
   savedMoviesPath
 }) {
   const [moviesSearchQuery, setMoviesSearchQuery] = useStorage('movies-search-query', '');
-  const [savedMoviesSearchQuery, setSavedMoviesQuery] = useStorage('saved-movies-search-query', '');
+  const [savedMoviesSearchQuery, setSavedMoviesQuery] = useState('');
   
   function handleInputChande(e) {
     const inputValue = e.target.value;
@@ -31,6 +31,8 @@ useEffect(() => {
       setSavedMoviesQuery(savedMoviesSearchQuery);
     }
   }, [savedMoviesPath, setMoviesSearchQuery, setSavedMoviesQuery, moviesSearchQuery, savedMoviesSearchQuery]);
+
+
 
   return (
     <div className="search">
