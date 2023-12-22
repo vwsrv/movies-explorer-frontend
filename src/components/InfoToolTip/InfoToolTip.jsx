@@ -1,5 +1,5 @@
 import succesLogo from "../../images/main_logo.svg";
-import errorLogo from "../../images/error__auth.svg";
+import errorLogo from "../../images/message_error.svg";
 import { useSpring, animated } from "react-spring";
 import { useEffect } from "react";
 
@@ -11,12 +11,12 @@ export default function InfoToolTip({ name, isOpen, onClose, authMessage }) {
 
   useEffect(() => {
     if (isOpen) {
-        const timerId = setTimeout(() => {
-            onClose()
-        }, 1500)
-        return () => clearTimeout(timerId)
+      const timerId = setTimeout(() => {
+        onClose();
+      }, 1500);
+      return () => clearTimeout(timerId);
     }
-  }, [isOpen, onClose])
+  }, [isOpen, onClose]);
 
   return (
     <div className={`popup popup_form_${name} ${isOpen && "popup_opened"}`}>

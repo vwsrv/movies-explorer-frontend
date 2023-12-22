@@ -93,7 +93,8 @@
     color: rgba(238, 52, 101, 1);
 }
 
-.auth__input-error, .auth__submit-error {
+.auth__input-error,
+.auth__submit-error {
     transition: .3s;
     margin: 0;
     padding: 0;
@@ -191,7 +192,7 @@
     .auth__submit-btn {
         font-size: 12px;
         line-height: 15px;
-        
+
     }
 
     .auth__form-container--signin {

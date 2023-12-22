@@ -1,6 +1,12 @@
 import { useFormContext } from "react-hook-form";
 
-export default function ValidationInput({ name, rules, inputName, inputType, ...rest }) {
+export default function ValidationInput({
+  name,
+  rules,
+  inputName,
+  inputType,
+  ...rest
+}) {
   const {
     register,
     formState: { errors },

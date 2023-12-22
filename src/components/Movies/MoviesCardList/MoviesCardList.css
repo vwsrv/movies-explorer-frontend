@@ -51,6 +51,10 @@
     .movies-cards--btn {
         margin: 82px auto 80px;
     }
+
+    .movies-cards--items__notfound {
+        grid-column: span 2;
+    }
 }
 
 @media screen and (max-width: 651px) {

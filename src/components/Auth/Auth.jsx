@@ -24,7 +24,9 @@ export default function Auth({
       <form className="auth__form auth__form_type-register" onSubmit={onSubmit}>
         {children}
         <div className={`auth__form-container auth__form-container--${name}`}>
-          <span className={"auth__submit-error auth__submit-error_inactive"}>{connectionError}</span>
+          <span className={"auth__submit-error auth__submit-error_inactive"}>
+            {connectionError}
+          </span>
           <button
             type="submit"
             className={`auth__submit-btn auth__submit-btn_type-${name} ${

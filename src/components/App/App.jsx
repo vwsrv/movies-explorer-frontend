@@ -21,13 +21,17 @@ import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import InfoToolTip from "../InfoToolTip/InfoToolTip";
 
 export default function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useStorage("isLoggedIn", false);
   const [currentUser, setCurrentUser] = useStorage("currentUser", {});
   const [moviesCards, setMoviesCards] = useState([]);
-  const [searchedMoviesCards, setSearchedMoviesCards] = useStorage("movies-cards", []);
+  const [searchedMoviesCards, setSearchedMoviesCards] = useStorage(
+    "movies-cards",
+    []
+  );
   const [savedMoviesCards, setSavedMoviesCards] = useState([]);
   const [searchedSavedMovies, setSearchedSavedMovies] = useState([]);
   const [isMoviesFiltered, setMoviesFiltered] = useStorage(
@@ -44,14 +48,25 @@ export default function App() {
   const userId = localStorage.getItem("userId");
   const location = useLocation();
   const savedMoviesPath = location.pathname === "/saved-movies";
+  const [message, setMessage] = useState({ status: true, text: "" });
+  const [isAuthStatusPopupOpen, setAuthStatusPopupOpen] = useState(false);
+
+  function closeAllPopups() {
+    setAuthStatusPopupOpen(false);
+  }
 
   function handleRegister(email, password, name) {
     userApi
       .register(email, password, name)
       .then(() => {
-          handleLogin(email, password);
+        handleLogin(email, password);
       })
       .catch((err) => {
+        setMessage({
+          status: false,
+          text: "Возникла ошибка!",
+        });
+        setAuthStatusPopupOpen(true);
         setErrorMessage(err.message);
         console.log(err);
       });
@@ -64,12 +79,22 @@ export default function App() {
         token.setToken(res._id);
         setLoggedIn(true);
         setSuccessMessage("Добро пожаловать!");
+        setMessage({
+          status: true,
+          text: "Добро пожаловать!",
+        });
+        setAuthStatusPopupOpen(true);
         navigate("/movies", { replace: true });
         localStorage.setItem("isLoggedIn", true);
       })
       .catch((err) => {
         console.log(err.message);
         setErrorMessage(err.message);
+        setMessage({
+          status: false,
+          text: "Возникла ошибка!",
+        });
+        setAuthStatusPopupOpen(true);
       });
   }
 
@@ -86,11 +111,21 @@ export default function App() {
       .then((updatedUserData) => {
         setCurrentUser(updatedUserData);
         setErrorMessage("");
-        setSuccessMessage("Данные успешно обновлены!");
+        setSuccessMessage("Профиль обновлен!");
+        setMessage({
+          status: true,
+          text: "Профиль обновлен!",
+        });
+        setAuthStatusPopupOpen(true);
       })
       .catch((err) => {
         console.log(err.message);
         setErrorMessage(err.message);
+        setMessage({
+          status: false,
+          text: "Возникла ошибка!",
+        });
+        setAuthStatusPopupOpen(true);
       });
   }
 
@@ -139,10 +174,10 @@ export default function App() {
   useEffect(() => {
     if (loggedIn) {
       userApi
-        .getSavedMoviesCards({owner: userId})
+        .getSavedMoviesCards({ owner: userId })
         .then((userMoviesData) => {
           setSavedMoviesCards(userMoviesData.data);
-          setSearchedSavedMovies(userMoviesData.data)
+          setSearchedSavedMovies(userMoviesData.data);
         })
         .catch((err) => {
           console.log(err.message);
@@ -155,7 +190,7 @@ export default function App() {
       .saveMovie(movieCard)
       .then((movieCard) => {
         setSavedMoviesCards([movieCard, ...savedMoviesCards]);
-        setSearchedSavedMovies([movieCard, ...searchedSavedMovies])
+        setSearchedSavedMovies([movieCard, ...searchedSavedMovies]);
       })
       .catch((err) => {
         console.log(err.message);
@@ -277,6 +312,12 @@ export default function App() {
           />
         </Routes>
         <Footer />
+        <InfoToolTip
+          isOpen={isAuthStatusPopupOpen}
+          onClose={closeAllPopups}
+          name="info"
+          authMessage={message}
+        />
       </CurrentUserContext.Provider>
     </div>
   );

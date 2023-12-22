@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useSpring, animated, config } from "react-spring";
+import { useState } from "react";
+import { useSpring, animated } from "react-spring";
 import useResize from "../../hooks/useResize";
 import {
   MOBILE_SCREEN_SZ,
@@ -66,7 +66,9 @@ export default function BurgerMenu() {
         <button
           type="button"
           className={
-            isActiveBurger ? "burgermenu-btn burgermenu-btn_active" : "burgermenu-btn"
+            isActiveBurger
+              ? "burgermenu-btn burgermenu-btn_active"
+              : "burgermenu-btn"
           }
           onClick={toggleBurgerManu}
         >

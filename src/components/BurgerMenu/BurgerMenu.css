@@ -14,7 +14,7 @@
     width: 100%;
     height: 100%;
     visibility: hidden;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 
@@ -208,7 +208,7 @@
     .menu__link {
         margin: 0 0 22px;
     }
-    
+
     .menu__link:nth-last-child(1) {
         margin-bottom: 235px;
     }
