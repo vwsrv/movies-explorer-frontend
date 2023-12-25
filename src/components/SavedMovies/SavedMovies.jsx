@@ -11,6 +11,8 @@ export default function SavedMovies({
   onSave,
   onDelete,
   savedMoviesPath,
+  setSearching, 
+  errorMessage
 }) {
   function toggleFilterSavedMovies() {
     setFiltered(document.getElementById("search-type").checked);
@@ -23,8 +25,10 @@ export default function SavedMovies({
         onSearch={onSearch}
         onFilterButton={toggleFilterSavedMovies}
         savedMoviesPath={savedMoviesPath}
+        setSearching={setSearching}
       />
       <MoviesCardList
+        errorMessage={errorMessage}
         isLoading={isLoading}
         movies={movies}
         savedMovies={savedMovies}

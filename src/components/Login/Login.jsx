@@ -1,11 +1,11 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { emailAngular } from "../../utils/constants";
+import { EMAIL_ANGULAR } from "../../utils/constants";
 import { useEffect } from "react";
 import Auth from "../Auth/Auth";
 import ValidationInput from "../ValidationInput/ValidationInput";
 
-export default function Login({ onLogin, connectionError, successMessage }) {
+export default function Login({ onLogin, connectionError }) {
   const [connectionInfo, setConnectionInfo] = useState("");
   const methods = useForm({
     mode: "onChange",
@@ -13,7 +13,6 @@ export default function Login({ onLogin, connectionError, successMessage }) {
   });
   const userEmail = methods.watch("email");
   const userPassword = methods.watch("password");
-
   useEffect(() => {
     setConnectionInfo(connectionError);
   }, [connectionError]);
@@ -25,8 +24,8 @@ export default function Login({ onLogin, connectionError, successMessage }) {
   }, [userEmail, userPassword]);
 
   function onSubmit(data) {
-    if (successMessage) {
-      setConnectionInfo(successMessage);
+    if (!connectionError) {
+      setConnectionInfo('');
     }
     onLogin(data.email, data.password);
     setConnectionInfo(connectionError);
@@ -51,7 +50,7 @@ export default function Login({ onLogin, connectionError, successMessage }) {
           rules={{
             required: "Заполните это поле.",
             pattern: {
-              value: emailAngular,
+              value: EMAIL_ANGULAR,
               message: "Укажите корректный email.",
             },
           }}

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect, useContext, useCallback } from "react";
-import { emailAngular } from "../../utils/constants";
+import { EMAIL_ANGULAR } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 export default function Profile({
@@ -63,8 +63,7 @@ export default function Profile({
         ? "profile__edit-btn--type_edited"
         : "profile__edit-btn--inactive"
       : connectionError
-      ? "profile__edit-btn--type_edited profile__edit-btn--type_edited--inactive"
-      : "profile__edit-btn--type_edited profile__edit-btn--type_edited--inactive"
+      && "profile__edit-btn--type_edited profile__edit-btn--type_edited--inactive"
   }`;
 
   return (
@@ -100,7 +99,7 @@ export default function Profile({
             {...register("email", {
               required: "Заполните все поля.",
               pattern: {
-                value: emailAngular,
+                value: EMAIL_ANGULAR,
                 message: "Укажите корректный email.",
               },
             })}

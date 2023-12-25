@@ -166,10 +166,6 @@
     .profile__title {
         margin: 55px auto 97px;
     }
-
-    .profile__field:nth-child(2) {
-        margin: 0px 0 209px;
-    }
 }
 
 @media screen and (max-width: 651px) {
@@ -183,10 +179,6 @@
 
     .profile__title {
         margin: 67px auto 83px;
-    }
-
-    .profile__field:nth-child(2) {
-        margin: 0 0 377px;
     }
 
     .profile__button {

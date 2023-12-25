@@ -6,6 +6,7 @@ export default function SearchForm({
   onFilterButton,
   onSearch,
   savedMoviesPath,
+  setSearching
 }) {
   const [moviesSearchQuery, setMoviesSearchQuery] = useStorage(
     "movies-search-query",
@@ -13,7 +14,7 @@ export default function SearchForm({
   );
   const [savedMoviesSearchQuery, setSavedMoviesQuery] = useState("");
 
-  function handleInputChande(e) {
+  function handleInputChange(e) {
     const inputValue = e.target.value;
     if (savedMoviesPath) {
       setSavedMoviesQuery(inputValue);
@@ -29,17 +30,24 @@ export default function SearchForm({
 
   useEffect(() => {
     if (savedMoviesPath) {
-      setMoviesSearchQuery(moviesSearchQuery);
-    } else {
       setSavedMoviesQuery(savedMoviesSearchQuery);
+    } else {
+      setMoviesSearchQuery(moviesSearchQuery);
     }
   }, [
     savedMoviesPath,
     setMoviesSearchQuery,
-    setSavedMoviesQuery,
     moviesSearchQuery,
     savedMoviesSearchQuery,
+    setSavedMoviesQuery,
+    setSearching
   ]);
+
+  useEffect(() => {
+    if (savedMoviesPath && savedMoviesSearchQuery === '') {
+      setSearching(false);
+    }
+  })
 
   return (
     <div className="search">
@@ -50,8 +58,10 @@ export default function SearchForm({
             type="text"
             className="search__input"
             placeholder="Фильм"
-            onChange={handleInputChande}
-            value={savedMoviesPath ? savedMoviesSearchQuery : moviesSearchQuery}
+            onChange={handleInputChange}
+            value={
+              !savedMoviesPath ? moviesSearchQuery : savedMoviesSearchQuery
+            }
           />
           <button className="search__form-btn" type="submit"></button>
         </div>

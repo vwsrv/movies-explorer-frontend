@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { emailAngular } from "../../utils/constants";
+import { EMAIL_ANGULAR } from "../../utils/constants";
 import { useEffect } from "react";
 import Auth from "../Auth/Auth";
 import ValidationInput from "../ValidationInput/ValidationInput";
@@ -8,7 +8,6 @@ import ValidationInput from "../ValidationInput/ValidationInput";
 export default function Register({
   onRegister,
   connectionError,
-  successMessage,
 }) {
   const [connectionInfo, setConnectionInfo] = useState("");
 
@@ -26,9 +25,6 @@ export default function Register({
   }, [userName, userEmail, userPassword]);
 
   function onSubmit(data) {
-    if (successMessage) {
-      setConnectionInfo(successMessage);
-    }
     onRegister(data.email, data.password, data.name);
     setConnectionInfo(connectionError);
   }
@@ -68,7 +64,7 @@ export default function Register({
           rules={{
             required: "Заполните это поле.",
             pattern: {
-              value: emailAngular,
+              value: EMAIL_ANGULAR,
               message: "Укажите корректный email.",
             },
           }}
