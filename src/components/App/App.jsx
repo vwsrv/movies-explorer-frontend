@@ -43,16 +43,19 @@ export default function App() {
     false
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [userApiError, setUserApiError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [moviesApiError, setMoviesApiError] = useState("");
+  const [userMoviesApiError, setUserMoviesApiError] = useState("");
   const userId = localStorage.getItem("userId");
   const location = useLocation();
   const savedMoviesPath = location.pathname === "/saved-movies";
   const [message, setMessage] = useState({ status: true, text: "" });
-  const [isAuthStatusPopupOpen, setAuthStatusPopupOpen] = useState(false);
+  const [isStatusPopupOpen, setStatusPopupOpen] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
 
   function closeAllPopups() {
-    setAuthStatusPopupOpen(false);
+    setStatusPopupOpen(false);
   }
 
   function handleRegister(email, password, name) {
@@ -66,8 +69,8 @@ export default function App() {
           status: false,
           text: "Возникла ошибка!",
         });
-        setAuthStatusPopupOpen(true);
-        setErrorMessage(err.message);
+        setStatusPopupOpen(true);
+        setUserApiError(err.message);
         console.log(err);
       });
   }
@@ -78,23 +81,23 @@ export default function App() {
       .then((res) => {
         token.setToken(res._id);
         setLoggedIn(true);
-        setSuccessMessage("Добро пожаловать!");
         setMessage({
           status: true,
           text: "Добро пожаловать!",
         });
-        setAuthStatusPopupOpen(true);
+        setStatusPopupOpen(true);
+        setSuccessMessage("Добро пожаловать!");
         navigate("/movies", { replace: true });
         localStorage.setItem("isLoggedIn", true);
       })
       .catch((err) => {
         console.log(err.message);
-        setErrorMessage(err.message);
+        setUserApiError(err.message);
         setMessage({
           status: false,
           text: "Возникла ошибка!",
         });
-        setAuthStatusPopupOpen(true);
+        setStatusPopupOpen(true);
       });
   }
 
@@ -110,28 +113,28 @@ export default function App() {
       .updateUserInfo(email, name)
       .then((updatedUserData) => {
         setCurrentUser(updatedUserData);
-        setErrorMessage("");
+        setUserApiError("");
         setSuccessMessage("Профиль обновлен!");
         setMessage({
           status: true,
           text: "Профиль обновлен!",
         });
-        setAuthStatusPopupOpen(true);
+        setStatusPopupOpen(true);
       })
       .catch((err) => {
         console.log(err.message);
-        setErrorMessage(err.message);
+        setUserApiError(err.message);
         setMessage({
           status: false,
           text: "Возникла ошибка!",
         });
-        setAuthStatusPopupOpen(true);
+        setStatusPopupOpen(true);
       });
   }
 
   useEffect(() => {
     if (successMessage) {
-      setErrorMessage("");
+      setUserApiError("");
       const timeout = setTimeout(() => {
         setSuccessMessage("");
       }, 1500);
@@ -163,7 +166,7 @@ export default function App() {
         })
         .catch((err) => {
           console.log(err.message);
-          setErrorMessage("Произошла ошибка на стороне сервера Beats-Film.");
+          setMoviesApiError("Произошла ошибка на стороне сервера Beats-Film.");
         })
         .finally(() => {
           setIsLoading(false);
@@ -180,6 +183,9 @@ export default function App() {
           setSearchedSavedMovies(userMoviesData.data);
         })
         .catch((err) => {
+          setUserMoviesApiError(
+            "Произошла ошибка на стороне сервера, попробуйте позднее."
+          );
           console.log(err.message);
         });
     }
@@ -202,14 +208,14 @@ export default function App() {
       .deleteMovie(movie)
       .then(() => {
         setSavedMoviesCards((moviesData) =>
-          moviesData.filter((card) => card._id !== (movie._id || movie))
+          moviesData.filter((card) => card._id !== (movie._id ?? movie))
         );
         setSearchedSavedMovies((moviesData) =>
-          moviesData.filter((card) => card._id !== (movie._id || movie))
+          moviesData.filter((card) => card._id !== (movie._id ?? movie))
         );
       })
       .catch((err) => {
-        console.log(`${err.message}.`);
+        console.log(err.message);
       });
   }
 
@@ -223,6 +229,7 @@ export default function App() {
   }
 
   function handleSearchMovie(query) {
+    setIsSearching(true);
     if (savedMoviesPath) {
       const searchedSavedMovies = searchMovieInList(savedMoviesCards, query);
       setSearchedSavedMovies(searchedSavedMovies);
@@ -231,6 +238,12 @@ export default function App() {
       setSearchedMoviesCards(searchedMovies);
     }
   }
+
+  useEffect(() => {
+    if (!isSearching) {
+      setSearchedSavedMovies(savedMoviesCards);
+    }
+  }, [isSearching, savedMoviesCards, setSearchedSavedMovies]);
 
   return (
     <div className="page">
@@ -247,7 +260,7 @@ export default function App() {
                 onLogout={handleLogout}
                 loggedIn={loggedIn}
                 onUpdateUser={handleUpdateUserInfo}
-                connectionError={errorMessage}
+                connectionError={userApiError}
                 successMessage={successMessage}
               />
             }
@@ -267,7 +280,7 @@ export default function App() {
                 isFiltered={isMoviesFiltered}
                 setFiltered={setMoviesFiltered}
                 savedMoviesPath={savedMoviesPath}
-                errorMessage={errorMessage}
+                errorMessage={moviesApiError}
               />
             }
           />
@@ -279,6 +292,7 @@ export default function App() {
                 onSearch={handleSearchMovie}
                 onSave={handleSaveMovieCard}
                 onDelete={handleDeleteMovieCard}
+                errorMessage={userMoviesApiError}
                 loggedIn={loggedIn}
                 isLoading={isLoading}
                 movies={searchedSavedMovies}
@@ -286,13 +300,22 @@ export default function App() {
                 savedMoviesPath={savedMoviesPath}
                 isFiltered={isSavedMoviesFiltered}
                 setFiltered={setSavedMoviesFiltered}
+                setSearching={setIsSearching}
               />
             }
           />
           <Route
             path="signin"
             element={
-              <Login onLogin={handleLogin} connectionError={errorMessage} />
+              loggedIn ? (
+                <Navigate to="/movies" replace />
+              ) : (
+                <Login
+                  onLogin={handleLogin}
+                  connectionError={userApiError}
+                  connectionSuccess={successMessage}
+                />
+              )
             }
           />
           <Route
@@ -304,8 +327,7 @@ export default function App() {
                 <Register
                   onRegister={handleRegister}
                   loggedIn={loggedIn}
-                  connectionError={errorMessage}
-                  successMessage={successMessage}
+                  connectionError={userApiError}
                 />
               )
             }
@@ -313,7 +335,7 @@ export default function App() {
         </Routes>
         <Footer />
         <InfoToolTip
-          isOpen={isAuthStatusPopupOpen}
+          isOpen={isStatusPopupOpen}
           onClose={closeAllPopups}
           name="info"
           authMessage={message}
