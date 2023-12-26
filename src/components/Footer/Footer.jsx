@@ -15,7 +15,7 @@ export default function Footer() {
           Учебный проект Яндекс.Практикум х BeatFilm.
         </p>
         <div className="footer__container">
-          <p className="footer__copyright">© 2020</p>
+          <p className="footer__copyright">© 2023</p>
           <nav className="footer__links">
             <a
               href="https://practicum.yandex.ru/"

@@ -6,7 +6,7 @@ export default function Portfolio() {
       <h2 className="portfolio__title">Портфолио</h2>
       <div className="portfolio__item">
         <a
-          href="https://github.com/vwsrv/how-to-learn"
+          href="https://vwsrv.github.io/how-to-learn/"
           className="portfolio__link"
           rel="noreferrer"
           target="_blank"
@@ -36,7 +36,7 @@ export default function Portfolio() {
       </div>
       <div className="portfolio__item">
         <a
-          href="https://github.com/vwsrv/mesto-project-full"
+          href="https://vwsrv.github.io/react-mesto-auth"
           className="portfolio__link"
           rel="noreferrer"
           target="_blank"
