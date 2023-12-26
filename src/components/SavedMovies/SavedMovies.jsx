@@ -1,12 +1,11 @@
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
+import { useState } from "react";
 
 export default function SavedMovies({
   isLoading,
   movies,
   savedMovies,
-  isFiltered,
-  setFiltered,
   onSearch,
   onSave,
   onDelete,
@@ -14,14 +13,16 @@ export default function SavedMovies({
   setSearching, 
   errorMessage
 }) {
+  const [isSavedMoviesFiltered, setSavedMoviesFiltered] = useState(false);
+
   function toggleFilterSavedMovies() {
-    setFiltered(document.getElementById("search-type").checked);
+    setSavedMoviesFiltered(document.getElementById("search-type").checked);
   }
 
   return (
     <main className="saved-movies">
       <SearchForm
-        isFiltered={isFiltered}
+        isFiltered={isSavedMoviesFiltered}
         onSearch={onSearch}
         onFilterButton={toggleFilterSavedMovies}
         savedMoviesPath={savedMoviesPath}
@@ -32,7 +33,7 @@ export default function SavedMovies({
         isLoading={isLoading}
         movies={movies}
         savedMovies={savedMovies}
-        isFiltered={isFiltered}
+        isFiltered={isSavedMoviesFiltered}
         onSave={onSave}
         onDelete={onDelete}
         savedMoviesPath={savedMoviesPath}
