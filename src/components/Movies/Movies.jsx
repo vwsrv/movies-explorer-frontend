@@ -1,27 +1,31 @@
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import useStorage from '../../hooks/useLocalStorage'
 
 export default function Movies({
   isLoading,
   movies,
   savedMovies,
-  setFiltered,
-  isFiltered,
   onSearch,
   onSave,
   onDelete,
   savedMoviesPath,
   errorMessage,
 }) {
+  const [isMoviesFiltered, setMoviesFiltered] = useStorage(
+    "movies-checked",
+    false
+  );
+
   function toggleFilterMovies() {
-    setFiltered(document.getElementById("search-type").checked);
+    setMoviesFiltered(document.getElementById("search-type").checked);
   }
 
   return (
     <main className="movies">
       <SearchForm
         onFilterButton={toggleFilterMovies}
-        isFiltered={isFiltered}
+        isFiltered={isMoviesFiltered}
         onSearch={onSearch}
         savedMoviesPath={savedMoviesPath}
       />
@@ -29,7 +33,7 @@ export default function Movies({
         isLoading={isLoading}
         movies={movies}
         savedMovies={savedMovies}
-        isFiltered={isFiltered}
+        isFiltered={isMoviesFiltered}
         onSave={onSave}
         onDelete={onDelete}
         savedMoviesPath={savedMoviesPath}
