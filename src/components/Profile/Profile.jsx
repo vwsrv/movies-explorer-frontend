@@ -63,7 +63,8 @@ export default function Profile({
         ? "profile__edit-btn--type_edited"
         : "profile__edit-btn--inactive"
       : connectionError
-      && "profile__edit-btn--type_edited profile__edit-btn--type_edited--inactive"
+      ? "profile__edit-btn--type_edited profile__edit-btn--type_edited--inactive"
+      : "profile__edit-btn--type_edited profile__edit-btn--type_edited--inactive"
   }`;
 
   return (
