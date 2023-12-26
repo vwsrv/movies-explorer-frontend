@@ -34,14 +34,6 @@ export default function App() {
   );
   const [savedMoviesCards, setSavedMoviesCards] = useState([]);
   const [searchedSavedMovies, setSearchedSavedMovies] = useState([]);
-  const [isMoviesFiltered, setMoviesFiltered] = useStorage(
-    "movies-checked",
-    false
-  );
-  const [isSavedMoviesFiltered, setSavedMoviesFiltered] = useStorage(
-    "saved-movies-checked",
-    false
-  );
   const [isLoading, setIsLoading] = useState(false);
   const [userApiError, setUserApiError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -102,6 +94,7 @@ export default function App() {
   }
 
   function handleLogout() {
+    userApi.logout();
     token.removeToken();
     setLoggedIn(false);
     localStorage.clear();
@@ -277,8 +270,6 @@ export default function App() {
                 isLoading={isLoading}
                 movies={searchedMoviesCards}
                 savedMovies={savedMoviesCards}
-                isFiltered={isMoviesFiltered}
-                setFiltered={setMoviesFiltered}
                 savedMoviesPath={savedMoviesPath}
                 errorMessage={moviesApiError}
               />
@@ -298,8 +289,6 @@ export default function App() {
                 movies={searchedSavedMovies}
                 savedMovies={savedMoviesCards}
                 savedMoviesPath={savedMoviesPath}
-                isFiltered={isSavedMoviesFiltered}
-                setFiltered={setSavedMoviesFiltered}
                 setSearching={setIsSearching}
               />
             }
