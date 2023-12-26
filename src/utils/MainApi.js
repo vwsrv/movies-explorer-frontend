@@ -56,6 +56,16 @@ class MainApi {
     });
   }
 
+  logout() {
+    return fetch(`${this._baseUrl}/signout`, {
+      method: "POST",
+      headers: this._headers,
+      credentials: this._credentials
+    }).then((res) => {
+      return this._checkServerResponse(res);
+    })
+  }
+
   saveMovie(movieData) {
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
@@ -84,9 +94,7 @@ class MainApi {
       method: "DELETE",
       credentials: this._credentials,
       headers: this._headers,
-    }).then((res) => {
-      return this._checkServerResponse(res);
-    });
+    })
   }
 
   getSavedMoviesCards() {
