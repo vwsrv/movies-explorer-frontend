@@ -2,7 +2,7 @@
     background-color: rgba(32, 32, 32, 1);
 }
 
-.nav__theme-default {
+.nav_theme_default {
     background-color: rgba(7, 48, 66, 1);
 }
 
@@ -45,7 +45,7 @@
     display: none;
 }
 
-.link__profile-logo {
+.nav__link-profile--image {
     background-color: rgba(49, 49, 49, 1);
     background-image: url('../../images/profile__logo.svg');
     background-repeat: no-repeat;
@@ -55,7 +55,7 @@
     border-radius: 20px;
 }
 
-.movies__links {
+.nav__links--movies {
     display: flex;
     align-items: center;
 }

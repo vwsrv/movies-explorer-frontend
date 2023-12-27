@@ -64,7 +64,7 @@
     letter-spacing: -0.04em;
 }
 
-.stack__name:nth-last-child(1) {
+.tech__stack-name:nth-last-child(1) {
     margin: 0;
 }
 
@@ -73,38 +73,55 @@
         padding: 90px 0 90px;
     }
 
+    .tech__title {
+        font-size: 22px;
+        line-height: 27px;
+    }
+
     .tech__subtitle {
-        margin-top: 78px;
+        margin-top: 80px;
     }
 
     .tech__container {
-        margin: 0 44px 0;
+        margin: 0 51px 0;
     }
 
-    .tech_brief {
+    .tech__brief {
+        margin-top: 24px;
         font-size: 12px;
         line-height: 18px;
-        max-width: 460px;
+        font-size: 12px;
+        line-height: 18px;
     }
 
     .tech__stack {
-        margin-top: 80px;
+        margin-top: 83px;
     }
 
     .tech__stack-name {
         font-size: 12px;
         line-height: 15px;
+        max-width: 85px;
+        margin-right: 9px;
+        height: 57px;
     }
 }
 
 @media screen and (max-width: 651px) {
     .tech {
-        padding: 65px 0 70px;
+        padding: 69px 0 70px;
         margin: 0;
     }
-    
+
     .tech__title {
+        font-size: 18px;
+        line-height: 22px;
         padding: 0 0 28px;
+    }
+
+    .tech__brief {
+        font-size: 11px;
+        line-height: 16px;
     }
 
     .tech__container {
@@ -127,7 +144,7 @@
         margin-top: 50px;
         display: grid;
         grid-template-columns: repeat(2, min-content);
-        gap: 10px;
+        gap: 12px;
     }
 
     .tech__stack-name {

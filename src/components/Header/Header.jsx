@@ -1,14 +1,14 @@
 import headerLogo from "../../images/main_logo.svg";
 import Navigation from "../Navigation/Navigation";
 import { useLocation, NavLink } from "react-router-dom";
-import { hiddenRoutes } from "../../utils/constants";
+import { HIDDEN_ROUTES_DEFAULT } from "../../utils/constants";
 
 export default function Header({ loggedIn }) {
   const location = useLocation();
   const isMainPage = location.pathname === "/";
 
   return (
-    hiddenRoutes.includes(location.pathname) && (
+    HIDDEN_ROUTES_DEFAULT.includes(location.pathname) && (
       <header
         className={
           isMainPage

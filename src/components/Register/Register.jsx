@@ -1,104 +1,88 @@
-import Auth from "../Auth/Auth";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { emailAngular, passwordPattern } from "../../utils/constants";
+import { useForm, FormProvider } from "react-hook-form";
+import { EMAIL_ANGULAR } from "../../utils/constants";
+import { useEffect } from "react";
+import Auth from "../Auth/Auth";
+import ValidationInput from "../ValidationInput/ValidationInput";
 
-export default function Register() {
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isValid },
-  } = useForm({
-    mode: "all",
+export default function Register({
+  onRegister,
+  connectionError,
+}) {
+  const [connectionInfo, setConnectionInfo] = useState("");
+
+  const methods = useForm({
+    mode: "onChange",
+    defaultValues: { name: "", password: "" },
   });
+
+  const userName = methods.watch("name");
+  const userEmail = methods.watch("email");
+  const userPassword = methods.watch("password");
+
+  useEffect(() => {
+    setConnectionInfo("");
+  }, [userName, userEmail, userPassword]);
+
+  function onSubmit(data) {
+    onRegister(data.email, data.password, data.name);
+    setConnectionInfo(connectionError);
+  }
+
   return (
-    <Auth
-      name='register'
-      title="Добро пожаловать!"
-      buttonText="Зарегистрироваться"
-      authText="Уже зарегистрированы?"
-      linkText="Войти"
-      isValid={isValid}
-    >
-      <label htmlFor="user-name" className="auth__field">
-        <span className="auth__input-name">Имя</span>
-        <input
-          id="name-input"
-          type="text"
-          className="auth__input auth__input_type-name"
-          placeholder="Имя"
-          {...register("name", {
+    <FormProvider {...methods}>
+      <Auth
+        name="register"
+        title="Добро пожаловать!"
+        buttonText="Зарегистрироваться"
+        authText="Уже зарегистрированы?"
+        linkText="Войти"
+        isFormValid={methods.formState.isValid}
+        onSubmit={methods.handleSubmit(onSubmit)}
+        connectionError={connectionInfo}
+      >
+        <ValidationInput
+          inputName="Имя"
+          inputType="text"
+          name="name"
+          rules={{
             required: "Заполните это поле.",
             minLength: {
               value: 2,
-              message: `Минимальная длина имени: 2. Вы ввели: ${userName.length}.`,
+              message: `Минимальная длина имени: 2 симв.`,
             },
             maxLength: {
               value: 40,
-              message: `Максимальная длина имени: 40. Вы ввели: ${userName.length}.`,
+              message: `Максимальная длина имени: 40 симв.`,
             },
-          })}
-          onChange={(e) => setUserName(e.target.value)}
+          }}
         />
-        {errors?.name && (
-          <span className="auth__input-error auth__input-error_type-name">
-            {errors?.name?.message}
-          </span>
-        )}
-      </label>
-      <label htmlFor="user" className="auth__field">
-        <span className="auth__input-name">E-mail</span>
-        <input
-          id="email-input"
-          type="text"
-          className="auth__input auth__input_type-email"
-          placeholder="E-mail"
-          {...register("email", {
+        <ValidationInput
+          inputName="E-mail"
+          inputType="text"
+          name="email"
+          rules={{
             required: "Заполните это поле.",
             pattern: {
-              value: emailAngular,
+              value: EMAIL_ANGULAR,
               message: "Укажите корректный email.",
             },
-          })}
-          onChange={(e) => setUserEmail(e.target.value)}
+          }}
         />
-        {errors?.email && (
-          <span className="auth__input-error auth__input-error_type-name">
-            {errors?.email?.message}
-          </span>
-        )}
-      </label>
-      <label htmlFor="password" className="auth__field">
-        <span className="auth__input-name">Пароль</span>
-        <input
-          id="password-input"
-          type="password"
-          className="auth__input auth__input_type-password"
-          placeholder="Пароль"
-          {...register("password", {
+        <ValidationInput
+          inputName="Пароль"
+          inputType="password"
+          name="password"
+          autoComplete="true"
+          rules={{
             required: "Заполните это поле",
             minLength: {
               value: 8,
-              message: `Минимальная длина пароля: 8. Вы ввели: ${userPassword.length}.`,
+              message: `Минимальная длина пароля: 8 симв.`,
             },
-            pattern: {
-              value: passwordPattern,
-              message:
-                "Пароль должен содержать как минимум 1 строчную и 1 заглавную букву, 1 цифру и символы @$!%*?&",
-            },
-          })}
-          onChange={(e) => setUserPassword(e.target.value)}
+          }}
         />
-        {errors?.password && (
-          <span className="auth__input-error auth__input-error_type-name">
-            {errors?.password?.message}
-          </span>
-        )}
-      </label>
-    </Auth>
+      </Auth>
+    </FormProvider>
   );
 }

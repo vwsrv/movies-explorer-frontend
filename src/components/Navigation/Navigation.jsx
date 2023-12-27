@@ -10,10 +10,10 @@ export default function Navigation() {
   const isDefaultResolution = TABLET_SCREEN_SZ <= width;
 
   return (
-    <div className={!isMainPage ? "nav" : "nav__theme-default"}>
+    <div className={!isMainPage ? "nav" : "nav nav_theme_default"}>
       {isDefaultResolution ? (
         <nav className="nav__links">
-          <div className="movies__links">
+          <div className="nav__links--movies">
             <NavLink to="/movies" className="nav__link">
               Фильмы
             </NavLink>
@@ -23,7 +23,7 @@ export default function Navigation() {
           </div>
           <NavLink to="/profile" className="nav__link nav__link-profile">
             Аккаунт
-            <span className="link__profile-logo" />
+            <span className="nav__link-profile--image" />
           </NavLink>
         </nav>
       ) : (

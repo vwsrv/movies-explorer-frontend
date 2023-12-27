@@ -19,7 +19,7 @@
         "about photo"
         "carrer photo"
         "website photo";
-    margin: 66px 0 0;
+    margin: 67px 0 0;
     padding: 0;
 }
 
@@ -82,7 +82,11 @@
 
 @media screen and (max-width: 769px) {
     .about {
-        margin: 87px 45px 0;
+        margin: 90px 51px 0;
+    }
+
+    .about__title {
+        padding: 0 0 21px;
     }
 
     .about__person-name {
@@ -93,6 +97,7 @@
     .about__person-carrer {
         font-size: 12px;
         line-height: 18px;
+        max-width: 364px;
     }
 
     .about__person-about {
@@ -101,7 +106,7 @@
         max-width: 364px;
     }
 
-    .about__person-phoyo {
+    .about__person-photo {
         max-width: 255px;
         min-height: 307px;
     }
@@ -109,12 +114,14 @@
 
 @media screen and (max-width: 651px) {
     .about {
-        margin: 0 16px 20px;
-        padding-top: 75px;
+        margin: 0 14px 20px;
+        padding-top: 72px;
     }
-    
+
     .about__title {
         padding: 0 0 28px;
+        font-size: 18px;
+        line-height: 22px;
     }
 
     .about__person {

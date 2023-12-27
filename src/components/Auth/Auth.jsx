@@ -9,25 +9,33 @@ export default function Auth({
   authText,
   linkText,
   onSubmit,
-  isValid,
+  isFormValid,
+  connectionError,
 }) {
   const location = useLocation();
   const isRegister = location.pathname === "/signup";
 
   return (
-    <div className={`auth auth_form_${name}`}>
+    <main className={`auth auth_form_${name}`}>
       <NavLink to="/">
         <img src={authLogo} alt="Логотип сайта" className="auth__logo" />
       </NavLink>
       <h1 className="auth__title">{title}</h1>
       <form className="auth__form auth__form_type-register" onSubmit={onSubmit}>
         {children}
-        <button
-          type="submit"
-          className={isValid ? `auth__submit-btn auth__submit-btn_type-${name}` : `auth__submit-btn auth__submit-btn_type-${name} auth__submit-btn_inactive`}
-        >
-          {buttonText}
-        </button>
+        <div className={`auth__form-container auth__form-container--${name}`}>
+          <span className="auth__submit-error auth__submit-error_inactive">
+            {connectionError}
+          </span>
+          <button
+            type="submit"
+            className={`auth__submit-btn auth__submit-btn_type-${name} ${
+              isFormValid && !connectionError ? "" : "auth__submit-btn_inactive"
+            }`}
+          >
+            {buttonText}
+          </button>
+        </div>
         <div className="auth__signin">
           <p className="auth__text">{authText}</p>
           <NavLink
@@ -38,6 +46,6 @@ export default function Auth({
           </NavLink>
         </div>
       </form>
-    </div>
+    </main>
   );
 }

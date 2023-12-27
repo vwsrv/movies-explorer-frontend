@@ -1,9 +1,13 @@
-export default function Preloader() {
+import "./Preloader.css";
+
+const Preloader = () => {
   return (
     <div className="preloader">
-      <button type="button" className="preloader-btn">
-        Ещё
-      </button>
+      <div className="preloader__container">
+        <span className="preloader__round"></span>
+      </div>
     </div>
   );
-}
+};
+
+export default Preloader;

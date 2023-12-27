@@ -37,22 +37,29 @@
 
 .profile__field:nth-child(2) {
     padding: 0;
-    margin: 0 0 220px;
+    margin: 0;
     border-bottom: 0;
 }
 
 .profile__input {
-    width: 87%;
+    width: 85%;
     background: 0;
     border: 0;
     margin: 0;
-    padding: 0;
+    padding: 1px;
     text-align: right;
     color: white;
     outline: none;
 }
 
-.profile__input_name {
+.profile__input:focus {
+    transition: .3s;
+    background-color: rgb(46, 45, 45);
+    border-radius: 7px;
+    padding: 2px 0 2px;
+}
+
+.profile__input-name {
     font-size: 11px;
     font-weight: 500;
     line-height: 13px;
@@ -62,7 +69,9 @@
     padding: 0;
 }
 
-.profile__input-error {
+.profile__submit-error {
+    transition: .3;
+    margin: 0 0 20px;
     color: rgba(255, 0, 76, 1);
     font-size: 11px;
     font-weight: 400;
@@ -70,11 +79,15 @@
     letter-spacing: 0px;
     text-align: center;
     padding: 0;
-    margin: 0 0 20px;
+}
+
+.profile__submit-success {
+    color: green;
 }
 
 .profile__button {
     cursor: pointer;
+    transition: .3s;
     background: 0;
     outline: 0;
     border: 0;
@@ -84,14 +97,62 @@
     font-size: 13px;
 }
 
+.profile__button:hover {
+    opacity: .7;
+    transition: .3s;
+}
+
 .profile__edit-btn {
+    cursor: pointer;
     color: white;
     font-weight: 400;
     line-height: 16px;
 }
 
+.profile__submit-container {
+    display: flex;
+    flex-direction: column;
+    margin: 200px 0 0;
+}
+
+.profile__edit-btn--inactive {
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: rgb(83, 83, 83);
+}
+
+.profile__edit-btn--type_edited {
+    transition: .3s;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 3px;
+    min-height: 45px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
+    background: rgba(66, 133, 244, 1);
+    color: white;
+    outline: none;
+    border: none;
+}
+
+.profile__edit-btn--type_edited--inactive {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    background-color: rgb(83, 83, 83);
+    color: rgb(223, 220, 220);
+}
+
 .profile__signout-btn {
-    margin: 16px 0 0;
+    margin: 15px 0 0;
     text-decoration: none;
     color: rgba(238, 52, 101, 1);
     font-weight: 500;
@@ -99,15 +160,11 @@
 
 @media screen and (max-width: 769px) {
     .profile {
-        margin: 18vh auto 10vh;
+        margin: 236px auto 10vh;
     }
 
     .profile__title {
         margin: 55px auto 97px;
-    }
-
-    .profile__field:nth-child(2) {
-        margin: 0px 0 209px;
     }
 }
 
@@ -122,10 +179,6 @@
 
     .profile__title {
         margin: 67px auto 83px;
-    }
-
-    .profile__field:nth-child(2) {
-        margin: 0 0 29vh;
     }
 
     .profile__button {

@@ -1,79 +1,74 @@
 import { useState } from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import { EMAIL_ANGULAR } from "../../utils/constants";
+import { useEffect } from "react";
 import Auth from "../Auth/Auth";
-import { useForm } from "react-hook-form";
-import { emailAngular } from "../../utils/constants";
+import ValidationInput from "../ValidationInput/ValidationInput";
 
-export default function Login({ onLogin }) {
-  const [userEmail, setUserEmail] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm({
-    mode: "onBlur",
+export default function Login({ onLogin, connectionError }) {
+  const [connectionInfo, setConnectionInfo] = useState("");
+  const methods = useForm({
+    mode: "onChange",
+    defaultValues: { name: "", password: "" },
   });
+  const userEmail = methods.watch("email");
+  const userPassword = methods.watch("password");
+  useEffect(() => {
+    setConnectionInfo(connectionError);
+  }, [connectionError]);
 
-  function onSubmit() {
-    onLogin({ userEmail, userPassword });
+  useEffect(() => {
+    if (userEmail || userPassword) {
+      setConnectionInfo("");
+    }
+  }, [userEmail, userPassword]);
+
+  function onSubmit(data) {
+    if (!connectionError) {
+      setConnectionInfo('');
+    }
+    onLogin(data.email, data.password);
+    setConnectionInfo(connectionError);
   }
 
   return (
-    <Auth
-      name='signin'
-      title="Рады видеть!"
-      buttonText="Войти"
-      authText="Ещё не зарегистрированы?"
-      linkText="Регистрация"
-      onSubmit={handleSubmit(onSubmit)}
-      isValid={isValid}
-    >
-      <label htmlFor="user" className="auth__field">
-        <span className="auth__input-name">E-mail</span>
-        <input
-          type="text"
-          className="auth__input auth__input_type-email"
-          placeholder="E-mail"
-          id="email-input"
-          {...register("email", {
+    <FormProvider {...methods}>
+      <Auth
+        name="signin"
+        title="Рады видеть!"
+        buttonText="Войти"
+        authText="Ещё не зарегистрированы?"
+        linkText="Регистрация"
+        onSubmit={methods.handleSubmit(onSubmit)}
+        connectionError={connectionInfo}
+        isFormValid={methods.formState.isValid}
+      >
+        <ValidationInput
+          inputName="E-mail"
+          inputType="text"
+          name="email"
+          rules={{
             required: "Заполните это поле.",
             pattern: {
-              value: emailAngular,
+              value: EMAIL_ANGULAR,
               message: "Укажите корректный email.",
             },
-          })}
-          onChange={(e) => setUserEmail(e.target.value)}
-          value={userEmail}
+          }}
         />
-        {errors?.email && (
-          <span className="auth__input-error auth__input-error_type-name">
-            {errors?.email?.message}
-          </span>
-        )}
-      </label>
-      <label htmlFor="password" className="auth__field">
-        <span className="auth__input-name">Пароль</span>
-        <input
-          type="password"
-          id="password-input"
-          className="auth__input auth__input_type-password"
-          placeholder="Пароль"
-          {...register("password", {
+        <ValidationInput
+          name="password"
+          inputType="password"
+          inputName="Пароль"
+          autoComplete="true"
+          rules={{
             required: "Заполните это поле.",
             minLength: {
               value: 8,
-              message: `Минимальная длина пароля: 8. Вы ввели: ${userPassword.length}.`,
+              message: `Минимальная длина пароля: 8 симв.`,
             },
-          })}
-          onChange={(e) => setUserPassword(e.target.value)}
-          value={userPassword}
+          }}
         />
-        {errors?.password && (
-          <span className="auth__input-error auth__input-error_type-name">
-            {errors?.password?.message}
-          </span>
-        )}
-      </label>
-    </Auth>
+      </Auth>
+    </FormProvider>
   );
 }

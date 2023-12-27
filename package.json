@@ -3,11 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://vavssrv.nomoredomainsrocks.ru",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "yarn run build && scp -r ./dist/* vavissarov@51.250.99.46:/home/vavissarov/frontend"
   },
   "dependencies": {
     "react": "^18.2.0",

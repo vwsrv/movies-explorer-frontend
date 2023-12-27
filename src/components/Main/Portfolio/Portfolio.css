@@ -10,7 +10,6 @@
     font-size: 18px;
     font-weight: 400;
     line-height: 20px;
-    letter-spacing: -4%;
     text-align: left;
 }
 
@@ -46,13 +45,12 @@
 }
 
 .portfolio__image {
-    margin: 0;
     padding: 0;
 }
 
 @media screen and (max-width: 769px) {
     .portfolio {
-        margin: 90px 45px 0;
+        margin: 90px 51px 0;
         padding: 0 0 90px;
     }
 
@@ -80,5 +78,9 @@
     .portfolio__name {
         font-size: 18px;
         line-height: 28px;
+    }
+
+    .portfolio__image {
+        max-width: 10px;
     }
 }
