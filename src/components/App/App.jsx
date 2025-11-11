@@ -243,10 +243,9 @@ export default function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <Header loggedIn={loggedIn} />
         <Routes>
-          <Route path="*" element={<NotFoundPage />} />
           <Route path="/" element={<Main />} />
           <Route
-            path="profile"
+            path="/profile"
             element={
               <ProtectedRouteElement
                 element={Profile}
@@ -259,7 +258,7 @@ export default function App() {
             }
           />
           <Route
-            path="movies"
+            path="/movies"
             element={
               <ProtectedRouteElement
                 element={Movies}
@@ -276,7 +275,7 @@ export default function App() {
             }
           />
           <Route
-            path="saved-movies"
+            path="/saved-movies"
             element={
               <ProtectedRouteElement
                 element={SavedMovies}
@@ -294,7 +293,7 @@ export default function App() {
             }
           />
           <Route
-            path="signin"
+            path="/signin"
             element={
               loggedIn ? (
                 <Navigate to="/movies" replace />
@@ -308,7 +307,7 @@ export default function App() {
             }
           />
           <Route
-            path="signup"
+            path="/signup"
             element={
               loggedIn ? (
                 <Navigate to="/movies" replace />
@@ -321,6 +320,7 @@ export default function App() {
               )
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
         <InfoToolTip
